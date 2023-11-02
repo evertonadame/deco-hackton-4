@@ -92,7 +92,7 @@ export interface Props {
 }
 
 const TabComponent = ({ tabs, title }: Props) => {
-  const activeTab = useSignal(0);
+  const activeTab = useSignal(2);
 
   function setActiveTab(index: number) {
     activeTab.value = index;
