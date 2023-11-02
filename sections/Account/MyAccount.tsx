@@ -1,4 +1,4 @@
-import MyAccountIslands from "$store/islands/MyAccount.tsx";
+import MyAccountIslands from "$store/islands/MyAccount/MyAccount.tsx";
 
 interface Address {
   street: string;
@@ -10,7 +10,7 @@ interface Address {
   zipCode: string;
 }
 
-interface User {
+export interface User {
   id: string;
   fullName: string;
   firstName: string;
