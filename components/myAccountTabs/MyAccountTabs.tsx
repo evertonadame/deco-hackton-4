@@ -1,9 +1,9 @@
 import SmartTab from "$store/islands/SmartTab.tsx";
 import MyAccountTab from "$store/islands/MyAccount/components/MyAccountTab.tsx";
 import MyAddressesTab from "$store/islands/MyAccount/components/MyAddressesTab.tsx";
-import type { User } from "$store/sections/Account/MyAccount.tsx";
-import MyCardsTab from "./components/MyCardsTab.tsx";
+import MyCardsTab from "$store/islands/MyAccount/components/MyCardsTab.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
+import type { User } from "$store/sections/Account/MyAccount.tsx";
 
 const MyAccount = ({ user }: { user: User }) => {
   return (
