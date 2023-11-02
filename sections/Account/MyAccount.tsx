@@ -12,6 +12,15 @@ export interface Address {
   default?: boolean;
 }
 
+export interface Card {
+  id: string;
+  number: string;
+  name: string;
+  expirationDate: string;
+  cvv: string;
+  default?: boolean;
+}
+
 export interface User {
   id: string;
   fullName: string;
@@ -28,6 +37,7 @@ export interface User {
     mobile: string;
   };
   adresses: Address[];
+  savedCards?: Card[];
 }
 
 export interface Props {

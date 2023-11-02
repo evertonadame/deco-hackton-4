@@ -19,14 +19,15 @@ import * as $$12 from "./islands/Header/Searchbar.tsx";
 import * as $$13 from "./islands/MyAccount/MyAccount.tsx";
 import * as $$14 from "./islands/MyAccount/components/MyAccountTab.tsx";
 import * as $$15 from "./islands/MyAccount/components/MyAddressesTab.tsx";
-import * as $$16 from "./islands/Newsletter.tsx";
-import * as $$17 from "./islands/OutOfStock.tsx";
-import * as $$18 from "./islands/ProductImageZoom.tsx";
-import * as $$19 from "./islands/SearchControls.tsx";
-import * as $$20 from "./islands/ShippingSimulation.tsx";
-import * as $$21 from "./islands/SliderJS.tsx";
-import * as $$22 from "./islands/SmartTab.tsx";
-import * as $$23 from "./islands/WishlistButton.tsx";
+import * as $$16 from "./islands/MyAccount/components/MyCardsTab.tsx";
+import * as $$17 from "./islands/Newsletter.tsx";
+import * as $$18 from "./islands/OutOfStock.tsx";
+import * as $$19 from "./islands/ProductImageZoom.tsx";
+import * as $$20 from "./islands/SearchControls.tsx";
+import * as $$21 from "./islands/ShippingSimulation.tsx";
+import * as $$22 from "./islands/SliderJS.tsx";
+import * as $$23 from "./islands/SmartTab.tsx";
+import * as $$24 from "./islands/WishlistButton.tsx";
 
 const manifest = {
   routes: {
@@ -49,14 +50,15 @@ const manifest = {
     "./islands/MyAccount/MyAccount.tsx": $$13,
     "./islands/MyAccount/components/MyAccountTab.tsx": $$14,
     "./islands/MyAccount/components/MyAddressesTab.tsx": $$15,
-    "./islands/Newsletter.tsx": $$16,
-    "./islands/OutOfStock.tsx": $$17,
-    "./islands/ProductImageZoom.tsx": $$18,
-    "./islands/SearchControls.tsx": $$19,
-    "./islands/ShippingSimulation.tsx": $$20,
-    "./islands/SliderJS.tsx": $$21,
-    "./islands/SmartTab.tsx": $$22,
-    "./islands/WishlistButton.tsx": $$23,
+    "./islands/MyAccount/components/MyCardsTab.tsx": $$16,
+    "./islands/Newsletter.tsx": $$17,
+    "./islands/OutOfStock.tsx": $$18,
+    "./islands/ProductImageZoom.tsx": $$19,
+    "./islands/SearchControls.tsx": $$20,
+    "./islands/ShippingSimulation.tsx": $$21,
+    "./islands/SliderJS.tsx": $$22,
+    "./islands/SmartTab.tsx": $$23,
+    "./islands/WishlistButton.tsx": $$24,
   },
   baseUrl: import.meta.url,
 };
