@@ -14,9 +14,11 @@ export interface Address {
 
 export interface Card {
   id: string;
+  flag: "visa" | "mastercard" | "elo" | "amex" | "hipercard" | "diners";
   number: string;
-  name: string;
-  expirationDate: string;
+  holder: string;
+  year: string;
+  month: string;
   cvv: string;
   default?: boolean;
 }

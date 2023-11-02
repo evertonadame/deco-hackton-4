@@ -27,3 +27,7 @@ export function formatPhone(phone: string) {
 export function formatBirthDate(birthDate: string) {
     return birthDate.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
 }
+
+export function returnOnlyFourCardDigits(cardNumber: string) {
+    return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$4");
+}

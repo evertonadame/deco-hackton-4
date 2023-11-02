@@ -92,7 +92,7 @@ function MyAddressesTab(
                 openEditor={openEditor}
               />
             ))}
-            <NewAdressCard openEditor={openEditor} />
+            <NewAdressCard openEditor={openEditor} type="adress" />
           </div>
         )
         : (
