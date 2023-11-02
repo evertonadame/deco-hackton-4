@@ -1,15 +1,16 @@
 import { useSignal } from "@preact/signals";
 import { JSX } from "preact/jsx-runtime";
 
-interface TabProps {
-  label: string;
-  isActive: boolean;
-  onClick: () => void;
-}
-
 interface Tab {
   label: string;
   content: JSX.Element;
+  icon: JSX.Element;
+}
+
+interface TabProps {
+  tab: Tab;
+  isActive: boolean;
+  onClick: () => void;
 }
 
 interface TabsProps {
@@ -19,17 +20,18 @@ interface TabsProps {
 }
 
 // Componente de Aba
-function Tab({ label, isActive, onClick }: Readonly<TabProps>) {
+function Tab({ tab, isActive, onClick }: Readonly<TabProps>) {
   return (
     <button
-      className={`w-full p-4 text-slate-600 bg-white border-b-4 lg:border-b-0 lg:border-l-4 duration-200 text-ellipsis whitespace-nowrap text-sm md:text-base ${
+      className={`flex justify-center gap-3 w-full p-4 text-slate-600 bg-white border-b-4 lg:border-b-0 lg:border-l-4 duration-200 text-ellipsis whitespace-nowrap text-sm md:text-base ${
         isActive
           ? "border-slate-600 font-semibold"
           : "border-transparent hover:bg-slate-50 hover:border-slate-300"
       }`}
       onClick={onClick}
     >
-      {label}
+      {tab.icon}
+      {tab.label}
     </button>
   );
 }
@@ -41,7 +43,7 @@ function Tabs({ tabs, activeTab, setActiveTab }: Readonly<TabsProps>) {
       {tabs.map((tab, index) => (
         <div key={`${tab.label}-${index}`}>
           <Tab
-            label={tab.label}
+            tab={tab}
             isActive={index === activeTab}
             onClick={() => setActiveTab(index)}
           />
@@ -61,7 +63,7 @@ function Content({
 }>) {
   return (
     <section className="w-full lg:w-3/4 px-8 pb-8 bg-white h-fit">
-      <article className="text-xl py-8 text-slate-600 border-b border-slate-200 mb-6">
+      <article className="text-xl py-8 text-slate-600 border-b border-slate-200 mb-6 font-semibold">
         {title}
       </article>
       <section>{content}</section>
