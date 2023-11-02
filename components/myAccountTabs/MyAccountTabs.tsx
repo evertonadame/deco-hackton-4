@@ -41,7 +41,7 @@ export interface Props {
 
 const MyAccount = ({ user }: Props) => {
   return (
-    <div className="w-full h-screen bg-slate-100 py-12 lg:py-20">
+    <div className="w-full h-screen bg-slate-100 py-4 lg:py-20">
       <div className="container px-4">
         <SmartTab
           tabs={[
