@@ -81,7 +81,7 @@ function MyAddressesTab({ adresses }: Props) {
   return (
     <>
       {!isEditingOrAdding.value?.value ? (
-        <div className="flex flex-col md:flex-row flex-wrap gap-5">
+        <div className="grid grid-cols-2 gap-6">
           {adressArray.value?.map((adress) => (
             <AdressCard
               adress={adress}
