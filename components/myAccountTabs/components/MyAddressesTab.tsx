@@ -1,4 +1,5 @@
 import AdressCard from "../ui/AdressCard.tsx";
+import NewAdressCard from "../ui/NewAdressCard.tsx";
 import EditAdress from "../ui/EditAdress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
@@ -22,7 +23,23 @@ function MyAddressesTab(
     };
   }
 
+  function excludeAdress(id: string) {
+    adressArray.value = adressArray.value?.filter(
+      (adressFromArray) => adressFromArray.id !== id,
+    );
+  }
+
   function saveAdress(adress: User["adresses"][number]) {
+    if (!adress.id) {
+      adress.id = Math.random().toString();
+      adressArray.value = [...adressArray.value ?? [], adress];
+      isEditingOrAdding.value = {
+        value: false,
+        address: null,
+      };
+      return;
+    }
+
     const newAdressArray = adressArray.value?.map((adressFromArray) => {
       if (adressFromArray.id === adress.id) {
         return adress;
@@ -39,7 +56,24 @@ function MyAddressesTab(
     };
   }
 
-  function openEditor(address: User["adresses"][number]) {
+  function openEditor(address?: User["adresses"][number]) {
+    if (!address) {
+      isEditingOrAdding.value = {
+        value: true,
+        address: {
+          id: Math.random().toString(),
+          zipCode: "",
+          street: "",
+          number: "",
+          complement: "",
+          district: "",
+          city: "",
+          state: "",
+        },
+      };
+      return;
+    }
+
     isEditingOrAdding.value = {
       value: true,
       address,
@@ -50,12 +84,16 @@ function MyAddressesTab(
     <>
       {!isEditingOrAdding.value?.value
         ? (
-          adressArray.value?.map((adress) => (
-            <AdressCard
-              adress={adress}
-              openEditor={openEditor}
-            />
-          ))
+          <div className="flex flex-col md:flex-row flex-wrap gap-2">
+            {adressArray.value?.map((adress) => (
+              <AdressCard
+                adress={adress}
+                excludeAdress={excludeAdress}
+                openEditor={openEditor}
+              />
+            ))}
+            <NewAdressCard openEditor={openEditor} />
+          </div>
         )
         : (
           <EditAdress

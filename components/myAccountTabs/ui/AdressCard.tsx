@@ -3,11 +3,12 @@ import type { Address } from "$store/sections/Account/MyAccount.tsx";
 interface AdressCardProps {
   adress: Address;
   openEditor: (adress: Address) => void;
+  excludeAdress: (id: string) => void;
 }
 
-function AdressCard({ adress, openEditor }: AdressCardProps) {
+function AdressCard({ adress, openEditor, excludeAdress }: AdressCardProps) {
   return (
-    <div className="border flex flex-col gap-1 p-5 border-primary relative">
+    <div className="border flex flex-col gap-1 p-5 border-primary relative flex-1 min-w-[250px]">
       <div className="flex flex-row flex-wrap justify-between gap-4">
         <div className="flex flex-row gap-4">
           <button
@@ -16,7 +17,10 @@ function AdressCard({ adress, openEditor }: AdressCardProps) {
           >
             Editar
           </button>
-          <button className="btn btn-secondary p-1 min-h-[25px] h-[25px]">
+          <button
+            className="btn btn-secondary p-1 min-h-[25px] h-[25px]"
+            onClick={() => excludeAdress(adress.id)}
+          >
             Excluir
           </button>
         </div>

@@ -20,6 +20,7 @@ function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
       fetch(`https://viacep.com.br/ws/${value}/json/`)
         .then((response) => response.json())
         .then((data) => {
+          console.log("🚀 ~ file: EditAdress.tsx:25 ~ .then ~ data:", data);
           formData.value = {
             ...formData.value,
             street: data.logradouro,
