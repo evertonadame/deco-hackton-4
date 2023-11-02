@@ -41,28 +41,30 @@ export interface Props {
 
 const MyAccount = ({ user }: Props) => {
   return (
-    <div>
-      <SmartTab
-        tabs={[
-          {
-            label: "Minha Conta",
-            content: <div>Minha Conta</div>,
-          },
-          {
-            label: "Meus Pedidos",
-            content: <div>Meus Pedidos</div>,
-          },
-          {
-            label: "Meus Endereços",
-            content: <div>Meus Endereços</div>,
-          },
-          {
-            label: "Meus Cartões",
-            content: <div>Meus Cartões</div>,
-          },
-        ]}
-        title={user.firstName}
-      />
+    <div className="w-full h-screen bg-slate-100 py-12 lg:py-20">
+      <div className="container px-4">
+        <SmartTab
+          tabs={[
+            {
+              label: "Minha Conta",
+              content: <div>Minha Conta</div>,
+            },
+            {
+              label: "Meus Pedidos",
+              content: <div>Meus Pedidos</div>,
+            },
+            {
+              label: "Meus Endereços",
+              content: <div>Meus Endereços</div>,
+            },
+            {
+              label: "Meus Cartões",
+              content: <div>Meus Cartões</div>,
+            },
+          ]}
+          title={user.firstName}
+        />
+      </div>
     </div>
   );
 };

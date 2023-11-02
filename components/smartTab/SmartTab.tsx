@@ -28,8 +28,10 @@ interface AccordionProps {
 function Tab({ label, isActive, onClick }: Readonly<TabProps>) {
   return (
     <button
-      className={`w-full p-2 border-t border-r border-l ${
-        isActive ? "border-b bg-white" : ""
+      className={`w-full p-2 py-4 text-slate-600 bg-white border-l-4 duration-200 ${
+        isActive
+          ? "border-slate-600 font-semibold"
+          : "border-transparent hover:bg-slate-50 hover:border-slate-300"
       }`}
       onClick={onClick}
     >
@@ -41,30 +43,44 @@ function Tab({ label, isActive, onClick }: Readonly<TabProps>) {
 // Componente de Abas
 function Tabs({ tabs, activeTab, setActiveTab }: Readonly<TabsProps>) {
   return (
-    <div className="w-1/4 bg-gray-200 hidden lg:block">
+    <div className="w-full bg-gray-200 hidden lg:block divide-y divide-solid divide-slate-200 h-fit">
       {tabs.map((tab, index) => (
-        <Tab
-          key={`${tab.label}-${index}`}
-          label={tab.label}
-          isActive={index === activeTab}
-          onClick={() => setActiveTab(index)}
-        />
+        <div key={`${tab.label}-${index}`}>
+          <Tab
+            label={tab.label}
+            isActive={index === activeTab}
+            onClick={() => setActiveTab(index)}
+          />
+        </div>
       ))}
     </div>
   );
 }
 
 // Componente de Conteúdo
-function Content({ content }: Readonly<{
+function Content({
+  content,
+  title,
+}: Readonly<{
   content: JSX.Element;
+  title: string;
 }>) {
-  return <div className="w-3/4 p-4">{content}</div>;
+  return (
+    <section className="w-3/4 px-8 pb-8 bg-white h-fit">
+      <article className="text-xl py-8 text-slate-600 border-b border-slate-200 mb-6">
+        {title}
+      </article>
+      <section>{content}</section>
+    </section>
+  );
 }
 
 // Componente Accordion para dispositivos móveis
-function Accordion(
-  { tabs, activeTab, setActiveTab }: Readonly<AccordionProps>,
-) {
+function Accordion({
+  tabs,
+  activeTab,
+  setActiveTab,
+}: Readonly<AccordionProps>) {
   return (
     <div className="w-full lg:hidden">
       {tabs.map((tab, index) => (
@@ -74,11 +90,7 @@ function Accordion(
             index === activeTab ? "bg-white" : ""
           }`}
         >
-          <button
-            onClick={() => setActiveTab(index)}
-          >
-            {tab.label}
-          </button>
+          <button onClick={() => setActiveTab(index)}>{tab.label}</button>
           {index === activeTab && <div className="p-4">{tab.content}</div>}
         </div>
       ))}
@@ -87,8 +99,8 @@ function Accordion(
 }
 
 export interface Props {
-  title: string;
   tabs: Tab[];
+  title: string;
 }
 
 const TabComponent = ({ tabs, title }: Props) => {
@@ -99,16 +111,21 @@ const TabComponent = ({ tabs, title }: Props) => {
   }
 
   return (
-    <div className="lg:flex">
-      <div>
-        {title}
+    <div className="lg:flex gap-10">
+      <div className="flex flex-col w-1/4">
+        <article className="px-10 py-8 bg-white text-lg border-b border-slate-200 text-slate-600">
+          Olá, {title}
+        </article>
         <Tabs
           tabs={tabs}
           activeTab={activeTab.value}
           setActiveTab={setActiveTab}
         />
       </div>
-      <Content content={tabs[activeTab.value].content} />
+      <Content
+        content={tabs[activeTab.value].content}
+        title={tabs[activeTab.value].label}
+      />
       <Accordion
         tabs={tabs}
         activeTab={activeTab.value}
