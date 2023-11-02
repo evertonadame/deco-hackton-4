@@ -1,4 +1,5 @@
 import SmartTab from "$store/islands/SmartTab.tsx";
+import MyAccountTab from "$store/islands/MyAccount/components/MyAccountTab.tsx";
 
 interface Address {
   street: string;
@@ -10,7 +11,7 @@ interface Address {
   zipCode: string;
 }
 
-interface User {
+export interface User {
   id: string;
   fullName: string;
   firstName: string;
@@ -47,19 +48,19 @@ const MyAccount = ({ user }: Props) => {
           tabs={[
             {
               label: "Minha Conta",
-              content: <div>Minha Conta</div>,
+              content: <div>Conteúdo Minha Conta</div>,
             },
             {
               label: "Meus Pedidos",
-              content: <div>Meus Pedidos</div>,
+              content: <div>Conteúdo Meus Pedidos</div>,
             },
             {
               label: "Meus Endereços",
-              content: <div>Meus Endereços</div>,
+              content: <div>Conteúdo Meus Endereços</div>,
             },
             {
               label: "Meus Cartões",
-              content: <div>Meus Cartões</div>,
+              content: <div>Conteúdo Meus Cartões</div>,
             },
           ]}
           title={user.firstName}
