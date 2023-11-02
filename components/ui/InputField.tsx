@@ -9,12 +9,12 @@ export type Props =
 
 function InputField({ label, readOnly, ...props }: Props) {
   const inputClass = readOnly
-    ? "min-h-[48px] input-disabled pl-4"
-    : "input input-bordered join-item min-h-[48px]";
+    ? "min-h-[48px] input-disabled pl-4 w-full"
+    : "input input-bordered join-item min-h-[48px] w-full";
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm text-gray-600 font-semibold ">
+      <label className="text-sm text-gray-600 font-semibold">
         {label}
       </label>
       <input

@@ -37,7 +37,7 @@ function Tab({ label, isActive, onClick }: Readonly<TabProps>) {
 // Componente de Abas
 function Tabs({ tabs, activeTab, setActiveTab }: Readonly<TabsProps>) {
   return (
-    <div className="flex flex-row lg:flex-col w-full bg-gray-200 lg:block lg:divide-y divide-solid divide-slate-200 h-fit overflow-scroll border-b border-slate-200 lg:border-0">
+    <div className="flex flex-row lg:flex-col w-full bg-gray-200 lg:block lg:divide-y divide-solid divide-slate-200 h-fit lg:overflow-hidden overflow-scroll border-b border-slate-200 lg:border-0">
       {tabs.map((tab, index) => (
         <div key={`${tab.label}-${index}`}>
           <Tab
@@ -75,7 +75,7 @@ export interface Props {
 }
 
 const TabComponent = ({ tabs, title }: Props) => {
-  const activeTab = useSignal(0);
+  const activeTab = useSignal(2);
 
   function setActiveTab(index: number) {
     activeTab.value = index;

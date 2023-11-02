@@ -1,6 +1,7 @@
 import MyAccountIslands from "$store/islands/MyAccount/MyAccount.tsx";
 
-interface Address {
+export interface Address {
+  id: string;
   street: string;
   number: string;
   complement: string;
@@ -8,6 +9,7 @@ interface Address {
   city: string;
   state: string;
   zipCode: string;
+  default?: boolean;
 }
 
 export interface User {
