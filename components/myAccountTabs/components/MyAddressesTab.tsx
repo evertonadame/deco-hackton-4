@@ -6,9 +6,7 @@ import type { User } from "$store/sections/Account/MyAccount.tsx";
 
 export interface Props extends Partial<User> {}
 
-function MyAddressesTab(
-  { adresses }: Props,
-) {
+function MyAddressesTab({ adresses }: Props) {
   const isEditingOrAdding = useSignal({
     value: false,
     address: null as null | User["adresses"][number],
@@ -25,14 +23,14 @@ function MyAddressesTab(
 
   function excludeAdress(id: string) {
     adressArray.value = adressArray.value?.filter(
-      (adressFromArray) => adressFromArray.id !== id,
+      (adressFromArray) => adressFromArray.id !== id
     );
   }
 
   function saveAdress(adress: User["adresses"][number]) {
     if (!adress.id) {
       adress.id = Math.random().toString();
-      adressArray.value = [...adressArray.value ?? [], adress];
+      adressArray.value = [...(adressArray.value ?? []), adress];
       isEditingOrAdding.value = {
         value: false,
         address: null,
@@ -82,26 +80,24 @@ function MyAddressesTab(
 
   return (
     <>
-      {!isEditingOrAdding.value?.value
-        ? (
-          <div className="flex flex-col md:flex-row flex-wrap gap-2">
-            {adressArray.value?.map((adress) => (
-              <AdressCard
-                adress={adress}
-                excludeAdress={excludeAdress}
-                openEditor={openEditor}
-              />
-            ))}
-            <NewAdressCard openEditor={openEditor} />
-          </div>
-        )
-        : (
-          <EditAdress
-            adress={isEditingOrAdding.value.address as User["adresses"][number]}
-            closeEditor={closeEditor}
-            saveAdress={saveAdress}
-          />
-        )}
+      {!isEditingOrAdding.value?.value ? (
+        <div className="flex flex-col md:flex-row flex-wrap gap-5">
+          {adressArray.value?.map((adress) => (
+            <AdressCard
+              adress={adress}
+              excludeAdress={excludeAdress}
+              openEditor={openEditor}
+            />
+          ))}
+          <NewAdressCard openEditor={openEditor} />
+        </div>
+      ) : (
+        <EditAdress
+          adress={isEditingOrAdding.value.address as User["adresses"][number]}
+          closeEditor={closeEditor}
+          saveAdress={saveAdress}
+        />
+      )}
     </>
   );
 }
