@@ -32,12 +32,13 @@ import * as $$$$$$24 from "./sections/Content/Benefits.tsx";
 import * as $$$$$$25 from "./sections/Content/Logos.tsx";
 import * as $$$$$$26 from "./sections/Content/Testimonials.tsx";
 import * as $$$$$$27 from "./sections/Header/Header.tsx";
-import * as $$$$$$28 from "./sections/Images/ShoppableBanner.tsx";
-import * as $$$$$$29 from "./sections/Images/Carousel.tsx";
-import * as $$$$$$30 from "./sections/Images/ImageGallery.tsx";
-import * as $$$$$$31 from "./sections/Images/BannerGrid.tsx";
-import * as $$$$$$32 from "./sections/Category/CategoryList.tsx";
-import * as $$$$$$33 from "./sections/Category/CategoryBanner.tsx";
+import * as $$$$$$28 from "./sections/Account/MyAccount.tsx";
+import * as $$$$$$29 from "./sections/Images/ShoppableBanner.tsx";
+import * as $$$$$$30 from "./sections/Images/Carousel.tsx";
+import * as $$$$$$31 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$32 from "./sections/Images/BannerGrid.tsx";
+import * as $$$$$$33 from "./sections/Category/CategoryList.tsx";
+import * as $$$$$$34 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -47,8 +48,9 @@ const manifest = {
     "deco-sites/storefront/loaders/List/Sections.tsx": $$$0,
   },
   "sections": {
-    "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$33,
-    "deco-sites/storefront/sections/Category/CategoryList.tsx": $$$$$$32,
+    "deco-sites/storefront/sections/Account/MyAccount.tsx": $$$$$$28,
+    "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$34,
+    "deco-sites/storefront/sections/Category/CategoryList.tsx": $$$$$$33,
     "deco-sites/storefront/sections/Content/Benefits.tsx": $$$$$$24,
     "deco-sites/storefront/sections/Content/Faq.tsx": $$$$$$23,
     "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$25,
@@ -56,10 +58,10 @@ const manifest = {
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$0,
     "deco-sites/storefront/sections/Gallery.tsx": $$$$$$21,
     "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$27,
-    "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$31,
-    "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$29,
-    "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$30,
-    "deco-sites/storefront/sections/Images/ShoppableBanner.tsx": $$$$$$28,
+    "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$32,
+    "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$30,
+    "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$31,
+    "deco-sites/storefront/sections/Images/ShoppableBanner.tsx": $$$$$$29,
     "deco-sites/storefront/sections/Layout/Container.tsx": $$$$$$17,
     "deco-sites/storefront/sections/Layout/Flex.tsx": $$$$$$19,
     "deco-sites/storefront/sections/Layout/Grid.tsx": $$$$$$20,
