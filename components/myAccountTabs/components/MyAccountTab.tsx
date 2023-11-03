@@ -56,7 +56,7 @@ function MyAccountTab({
           <label className="text-sm text-gray-600 font-semibold">Gênero</label>
           {isReadingMode.value
             ? (
-              <span className="pl-4">
+              <span className="pl-4 mt-3">
                 {formatGender(formData.value.gender ?? "")}
               </span>
             )
