@@ -1,13 +1,15 @@
 import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Card } from "$store/sections/Account/MyAccount.tsx";
+import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
 
 interface AddNewCardProps {
   closeEditor: () => void;
   saveCard: (card: Card) => void;
+  isLoading: boolean;
 }
 
-function AddNewCard({ closeEditor, saveCard }: AddNewCardProps) {
+function AddNewCard({ closeEditor, saveCard, isLoading }: AddNewCardProps) {
   const formData = useSignal({} as Card);
 
   function onChange(event: Event) {
@@ -71,24 +73,19 @@ function AddNewCard({ closeEditor, saveCard }: AddNewCardProps) {
           name="cvv"
           label="Código de segurança"
           value={formData.value.cvv}
+          maxLength={3}
+          size={2}
+          type="tel"
+          pattern="[0-9\s]{13,19}"
         />
       </div>
-      <div className="flex md:flex-row w-full gap-6 flex-col mt-4">
-        <button
-          className="btn btn-primary md:w-1/3 w-full"
-          onClick={() => {
-            saveCard(formData.value);
-          }}
-        >
-          Salvar
-        </button>
-        <button
-          className="btn btn-secondary md:w-1/3 w-full"
-          onClick={closeEditor}
-        >
-          Voltar
-        </button>
-      </div>
+      <FormActions
+        onSaveCallback={() => {
+          saveCard(formData.value);
+        }}
+        onCancelCallback={closeEditor}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

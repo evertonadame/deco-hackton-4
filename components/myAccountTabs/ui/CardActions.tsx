@@ -10,7 +10,7 @@ function CardActions({ editCallback, excludeCallback }: CardActionsProps) {
     <div className="flex flex-row gap-2">
       {editCallback ? (
         <button
-          className="btn-primary py-0.5 px-2 rounded-none h-auto duration-200"
+          className="btn-primary py-1 px-2 h-auto rounded duration-200"
           onClick={editCallback}
         >
           Editar
@@ -18,7 +18,7 @@ function CardActions({ editCallback, excludeCallback }: CardActionsProps) {
       ) : null}
       {excludeCallback ? (
         <button
-          className="btn-secondary py-0.5 px-2 rounded-none h-auto duration-200"
+          className="btn-secondary py-1 px-2 h-auto rounded duration-200"
           onClick={excludeCallback}
         >
           Excluir

@@ -39,7 +39,7 @@ function Tab({ tab, isActive, onClick }: Readonly<TabProps>) {
 // Componente de Abas
 function Tabs({ tabs, activeTab, setActiveTab }: Readonly<TabsProps>) {
   return (
-    <div className="flex flex-row lg:flex-col w-full bg-gray-200 lg:block lg:divide-y divide-solid divide-slate-200 h-fit lg:overflow-hidden overflow-scroll border-b border-slate-200 lg:border-0">
+    <div className="flex flex-row px-4 lg:px-0 lg:flex-col w-full lg:block lg:divide-y divide-solid divide-slate-200 h-fit lg:overflow-hidden overflow-scroll border-b border-slate-200 lg:border-0">
       {tabs.map((tab, index) => (
         <div key={`${tab.label}-${index}`}>
           <Tab
@@ -86,7 +86,7 @@ const TabComponent = ({ tabs, title }: Props) => {
   return (
     <div className="lg:flex gap-10">
       <div className="flex flex-col w-full lg:w-1/4">
-        <article className="px-10 py-8 bg-white text-lg lg:border-b border-slate-200 text-slate-600">
+        <article className="px-4 lg:px-8 py-6 lg:py-8 bg-white text-lg lg:border-b border-slate-200 text-slate-600">
           Olá, {title}
         </article>
         <Tabs

@@ -8,8 +8,8 @@ import type { User } from "$store/sections/Account/MyAccount.tsx";
 
 const MyAccount = ({ user }: { user: User }) => {
   return (
-    <div className="w-full min-h-screen bg-slate-100 py-4 lg:py-20">
-      <div className="container px-4">
+    <div className="w-full min-h-screen bg-white lg:bg-slate-100 py-4 lg:py-20">
+      <div className="container px-0 lg:px-4">
         <SmartTab
           tabs={[
             {

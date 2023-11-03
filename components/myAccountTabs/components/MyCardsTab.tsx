@@ -3,31 +3,32 @@ import { useSignal } from "@preact/signals";
 import CreditCard from "../ui/CreditCard.tsx";
 import type { Card, User } from "$store/sections/Account/MyAccount.tsx";
 import AddNewCard from "../ui/AddNewCard.tsx";
+import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 
 export interface Props extends Partial<User> {}
 
 function MyCardsTab({ savedCards }: Props) {
   const isEditingOrAdding = useSignal(false);
+  const isLoading = useSignal(false);
 
   const cardsArray = useSignal(savedCards);
 
-  function excludeAddress(id: string) {
+  const excludeAddress = (id: string) => {
     cardsArray.value = cardsArray.value?.filter(
       (cardsFrom) => cardsFrom.id !== id
     );
-  }
+  };
 
-  function openEditor() {
+  const openEditor = () => {
     isEditingOrAdding.value = true;
-  }
+  };
 
-  function closeEditor() {
+  const closeEditor = () => {
     isEditingOrAdding.value = false;
-  }
+  };
 
-  function saveCard(card: Card) {
+  const saveCard = async (card: Card) => {
     const { number, holder, month, year, cvv } = card ?? {};
-    console.log("🚀 ~ file: MyCardsTab.tsx:30 ~ saveCard ~ card:", card);
 
     if (
       !number.length ||
@@ -40,8 +41,21 @@ function MyCardsTab({ savedCards }: Props) {
     }
 
     cardsArray.value = [...(cardsArray.value ?? []), card];
+
+    isLoading.value = true;
+
+    try {
+      await saveData({
+        data: cardsArray.value,
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      isLoading.value = false;
+    }
+
     closeEditor();
-  }
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -53,7 +67,11 @@ function MyCardsTab({ savedCards }: Props) {
           <NewCard openEditor={openEditor} type="card" />
         </>
       ) : (
-        <AddNewCard closeEditor={closeEditor} saveCard={saveCard} />
+        <AddNewCard
+          closeEditor={closeEditor}
+          saveCard={saveCard}
+          isLoading={isLoading.value}
+        />
       )}
     </div>
   );
