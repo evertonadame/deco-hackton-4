@@ -28,6 +28,23 @@ export interface Order {
   price: number;
   date: string;
   status: "pending" | "approved" | "canceled";
+  paymentType: "creditCard" | "boleto" | "pix" | "voucher" | "debitCard";
+  deliveries: {
+    id: string;
+    history: {
+      date: string;
+      status:
+        | "ready-to-handle"
+        | "shipped"
+        | "delivered"
+        | "canceled"
+        | "returned";
+    }[];
+    shippingCompany: string;
+    trackingNumber: string;
+    deliveryForecast: string;
+    address: Address;
+  }[];
   items: {
     id: string;
     name: string;

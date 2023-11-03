@@ -1,3 +1,5 @@
+import { Order } from "../../../sections/Account/MyAccount.tsx";
+
 export function formatDocumentByType(document: string) {
   switch (document.length) {
     case 11:
@@ -48,3 +50,15 @@ export const priceFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
 });
+
+export const translateStatus = (status: Order["deliveries"][number]["history"][number]['status']) => {
+  const statusMapping = {
+    'ready-to-handle': 'Pronto para manuseio',
+    'shipped': 'Enviado',
+    'delivered': 'Entregue',
+    'canceled': 'Cancelado',
+    'returned': 'Devolvido',
+  };
+
+  return statusMapping[status] || status;
+};
