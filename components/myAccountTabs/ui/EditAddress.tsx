@@ -2,15 +2,15 @@ import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Address } from "$store/sections/Account/MyAccount.tsx";
 
-interface EditAdressProps {
-  adress: Address;
+interface EditAddressProps {
+  address: Address;
   closeEditor: () => void;
-  saveAdress: (adress: Address) => void;
+  saveAddress: (address: Address) => void;
 }
 
-function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
+function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
   const formData = useSignal({
-    ...adress,
+    ...address,
   });
 
   function onChange(event: Event) {
@@ -64,7 +64,7 @@ function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
       </div>
       <InputField
         onChange={onChange}
-        name="number"
+        name="district"
         label="Bairro"
         value={formData.value.district}
       />
@@ -84,22 +84,22 @@ function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
       </div>
       <div className="flex md:flex-row w-full gap-6 flex-col mt-4">
         <button
+          className="btn btn-primary md:w-1/3 w-full"
+          onClick={() => {
+            saveAddress(formData.value);
+          }}
+        >
+          Salvar
+        </button>
+        <button
           className="btn btn-secondary md:w-1/3 w-full"
           onClick={closeEditor}
         >
           Voltar
-        </button>
-        <button
-          className="btn btn-primary md:w-1/3 w-full"
-          onClick={() => {
-            saveAdress(formData.value);
-          }}
-        >
-          Salvar
         </button>
       </div>
     </div>
   );
 }
 
-export default EditAdress;
+export default EditAddress;

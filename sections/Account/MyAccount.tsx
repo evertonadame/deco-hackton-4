@@ -52,7 +52,7 @@ export interface User {
     phone: string;
     mobile: string;
   };
-  adresses: Address[];
+  addresses: Address[];
   savedCards?: Card[];
   orders?: Order[];
 }
