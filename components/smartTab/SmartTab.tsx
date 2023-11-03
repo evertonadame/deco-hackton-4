@@ -62,7 +62,7 @@ function Content({
   title: string;
 }>) {
   return (
-    <section className="w-full lg:w-3/4 px-8 pb-8 bg-white h-fit">
+    <section className="w-full lg:w-3/4 px-4 lg:px-8 pb-4 lg:pb-8 bg-white h-fit">
       <article className="text-xl py-8 text-slate-600 border-b border-slate-200 mb-6 font-semibold">
         {title}
       </article>

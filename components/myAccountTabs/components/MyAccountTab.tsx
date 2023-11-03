@@ -5,14 +5,19 @@ import {
   formatBirthDate,
   formatDocumentByType,
   formatPhone,
-} from "../utils/index.ts";
+} from "../utils/formatters.ts";
 import Button from "../../ui/Button.tsx";
 
 export interface Props extends Partial<User> {}
 
-function MyAccountTab(
-  { fullName, birthDate, document, contacts, email, gender }: Props,
-) {
+function MyAccountTab({
+  fullName,
+  birthDate,
+  document,
+  contacts,
+  email,
+  gender,
+}: Props) {
   const isReadingMode = useSignal(true);
 
   const formData = useSignal({
@@ -47,9 +52,7 @@ function MyAccountTab(
           readOnly={isReadingMode.value}
         />
         <div className="flex flex-col">
-          <label className="text-sm text-gray-600 font-semibold">
-            Gênero
-          </label>
+          <label className="text-sm text-gray-600 font-semibold">Gênero</label>
           <select
             onChange={onChange}
             name="gender"
@@ -88,7 +91,7 @@ function MyAccountTab(
       </div>
       <div className="w-full mt-4">
         <Button
-          onClick={() => isReadingMode.value = !isReadingMode.value}
+          onClick={() => (isReadingMode.value = !isReadingMode.value)}
           class="lg:w-32 w-full btn btn-primary"
         >
           {isReadingMode.value ? "Editar" : "Salvar"}

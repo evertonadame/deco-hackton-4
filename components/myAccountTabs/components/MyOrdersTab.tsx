@@ -2,26 +2,14 @@ import type { User, Order } from "$store/sections/Account/MyAccount.tsx";
 import {
   dateFormatter,
   priceFormatter,
-} from "$store/components/myAccountTabs/utils/index.ts";
+} from "$store/components/myAccountTabs/utils/formatters.ts";
 import ModalOrderDetails from "$store/components/myAccountTabs/ui/ModalOrderDetails.tsx";
 import { useState } from "preact/hooks";
+import { getStatusLabel } from "$store/components/myAccountTabs/utils/orderDetails.ts";
 
 export interface Props extends Partial<User> {}
 
-const getStatusLabel = (status: string) => {
-  switch (status) {
-    case "pending":
-      return "Pendente";
-    case "approved":
-      return "Aprovado";
-    case "canceled":
-      return "Cancelado";
-    default:
-      return status;
-  }
-};
-
-const getStatusColor = (status: string) => {
+export const getStatusColor = (status: string) => {
   switch (status) {
     case "pending":
       return "bg-amber-400";
@@ -60,7 +48,13 @@ function MyOrdersTab({ orders = [] }: Props) {
       </div>
     );
 
-  return (
+  return modalOrderDetails.isOpen ? (
+    <ModalOrderDetails
+      isOpen={modalOrderDetails.isOpen}
+      closeModal={closeModalOrderDetails}
+      order={modalOrderDetails.order}
+    />
+  ) : (
     <div className="relative overflow-x-auto">
       <table className="w-full text-base text-left text-slate-600 border border-slate-200">
         <thead className="text-base-600 text-xs font-semibold bg-slate-50">
@@ -116,11 +110,6 @@ function MyOrdersTab({ orders = [] }: Props) {
           })}
         </tbody>
       </table>
-      <ModalOrderDetails
-        isOpen={modalOrderDetails.isOpen}
-        closeModal={closeModalOrderDetails}
-        order={modalOrderDetails.order}
-      />
     </div>
   );
 }
