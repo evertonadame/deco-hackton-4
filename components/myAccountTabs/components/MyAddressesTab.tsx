@@ -3,6 +3,7 @@ import AddNewEntry from "../ui/AddNewEntry.tsx";
 import EditAddress from "../ui/EditAddress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
+import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 
 export interface Props extends Partial<User> {}
 
@@ -13,21 +14,37 @@ function MyAddressesTab({ addresses }: Props) {
   });
 
   const addressArray = useSignal(addresses);
+  const isLoading = useSignal(false);
 
-  function closeEditor() {
+  const closeEditor = () => {
     isEditingOrAdding.value = {
       value: false,
       address: null,
     };
-  }
+  };
 
-  function excludeAddress(id: string) {
+  const saveFormData = async () => {
+    isLoading.value = true;
+    try {
+      await saveData({
+        data: addressArray.value,
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      isLoading.value = false;
+    }
+
+    closeEditor();
+  };
+
+  const excludeAddress = (id: string) => {
     addressArray.value = addressArray.value?.filter(
       (addressFromArray) => addressFromArray.id !== id
     );
-  }
+  };
 
-  function saveAddress(address: User["addresses"][number]) {
+  const saveAddress = (address: User["addresses"][number]) => {
     const { city, complement, district, number, state, street, zipCode } =
       address ?? {};
 
@@ -46,10 +63,8 @@ function MyAddressesTab({ addresses }: Props) {
     if (!address.id) {
       address.id = Math.random().toString();
       addressArray.value = [...(addressArray.value ?? []), address];
-      isEditingOrAdding.value = {
-        value: false,
-        address: null,
-      };
+
+      saveFormData();
       return;
     }
 
@@ -63,11 +78,8 @@ function MyAddressesTab({ addresses }: Props) {
 
     addressArray.value = newAddressArray;
 
-    isEditingOrAdding.value = {
-      value: false,
-      address: null,
-    };
-  }
+    saveFormData();
+  };
 
   function openEditor(address?: User["addresses"][number]) {
     if (!address) {
@@ -111,6 +123,7 @@ function MyAddressesTab({ addresses }: Props) {
           address={isEditingOrAdding.value.address as User["addresses"][number]}
           closeEditor={closeEditor}
           saveAddress={saveAddress}
+          isLoading={isLoading.value}
         />
       )}
     </>

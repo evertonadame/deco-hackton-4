@@ -6,9 +6,10 @@ import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
 interface AddNewCardProps {
   closeEditor: () => void;
   saveCard: (card: Card) => void;
+  isLoading: boolean;
 }
 
-function AddNewCard({ closeEditor, saveCard }: AddNewCardProps) {
+function AddNewCard({ closeEditor, saveCard, isLoading }: AddNewCardProps) {
   const formData = useSignal({} as Card);
 
   function onChange(event: Event) {
@@ -79,6 +80,7 @@ function AddNewCard({ closeEditor, saveCard }: AddNewCardProps) {
           saveCard(formData.value);
         }}
         onCancelCallback={closeEditor}
+        isLoading={isLoading}
       />
     </div>
   );

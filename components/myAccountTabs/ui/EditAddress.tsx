@@ -7,9 +7,15 @@ interface EditAddressProps {
   address: Address;
   closeEditor: () => void;
   saveAddress: (address: Address) => void;
+  isLoading: boolean;
 }
 
-function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
+function EditAddress({
+  address,
+  closeEditor,
+  saveAddress,
+  isLoading,
+}: EditAddressProps) {
   const formData = useSignal({
     ...address,
   });
@@ -88,6 +94,7 @@ function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
           saveAddress(formData.value);
         }}
         onCancelCallback={closeEditor}
+        isLoading={isLoading}
       />
     </div>
   );

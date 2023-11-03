@@ -1,9 +1,16 @@
+import Spin from "$store/components/ui/Spin.tsx";
+
 interface OrderDetailsProps {
   onSaveCallback: () => void;
   onCancelCallback: () => void;
+  isLoading?: boolean;
 }
 
-function FormActions({ onSaveCallback, onCancelCallback }: OrderDetailsProps) {
+function FormActions({
+  onSaveCallback,
+  onCancelCallback,
+  isLoading = false,
+}: OrderDetailsProps) {
   return (
     <div className="flex md:flex-row w-full gap-4 flex-col mt-6">
       <button
@@ -11,6 +18,7 @@ function FormActions({ onSaveCallback, onCancelCallback }: OrderDetailsProps) {
         onClick={onSaveCallback}
       >
         Salvar
+        {isLoading ? <Spin /> : null}
       </button>
       <button className="btn btn-secondary" onClick={onCancelCallback}>
         Voltar

@@ -8,6 +8,7 @@ import {
   formatPhone,
 } from "../utils/formatters.ts";
 import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
+import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 
 export interface Props extends Partial<User> {}
 
@@ -20,6 +21,7 @@ function MyAccountTab({
   gender,
 }: Props) {
   const isReadingMode = useSignal(true);
+  const isLoading = useSignal(false);
 
   const formData = useSignal({
     fullName,
@@ -30,10 +32,26 @@ function MyAccountTab({
     email,
   });
 
-  function onChange(event: Event) {
+  const onChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     formData.value = { ...formData.value, [name]: value };
-  }
+  };
+
+  const handleOnSave = async () => {
+    isLoading.value = true;
+
+    try {
+      await saveData({
+        data: formData.value,
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      isLoading.value = false;
+    }
+
+    isReadingMode.value = true;
+  };
 
   const inputClassName = isReadingMode.value ? "py-2 bg-white" : "";
 
@@ -107,7 +125,8 @@ function MyAccountTab({
         {!isReadingMode.value ? (
           <FormActions
             onCancelCallback={() => (isReadingMode.value = true)}
-            onSaveCallback={() => {}}
+            onSaveCallback={handleOnSave}
+            isLoading={isLoading.value}
           />
         ) : (
           <button
