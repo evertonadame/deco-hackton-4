@@ -3,27 +3,25 @@ import { Order } from "../../../sections/Account/MyAccount.tsx";
 type StatusBadgeProps =
   Order["deliveries"][number]["history"][number]["status"];
 
-const StatusBadge = ({ status }: {
-  status: StatusBadgeProps;
-}) => {
+const StatusBadge = ({ status }: { status: StatusBadgeProps }) => {
   const getStatusColor = (status: StatusBadgeProps) => {
     switch (status) {
       case "ready-to-handle":
-        return "bg-slate-500";
+        return "bg-slate-400";
       case "shipped":
-        return "bg-yellow-500";
+        return "bg-yellow-400";
       case "delivered":
-        return "bg-green-500";
+        return "bg-green-400";
       case "canceled":
-        return "bg-red-500";
+        return "bg-red-400";
       case "returned":
-        return "bg-purple-500";
+        return "bg-purple-400";
       default:
-        return "bg-gray-500";
+        return "bg-gray-400";
     }
   };
 
-  return <div className={`w-6 h-6 rounded-full ${getStatusColor(status)}`} />;
+  return <div className={`w-5 h-5 rounded-full ${getStatusColor(status)}`} />;
 };
 
 export default StatusBadge;
