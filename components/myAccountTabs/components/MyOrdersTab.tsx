@@ -1,8 +1,10 @@
-import type { User } from "$store/sections/Account/MyAccount.tsx";
+import type { User, Order } from "$store/sections/Account/MyAccount.tsx";
 import {
   dateFormatter,
   priceFormatter,
 } from "$store/components/myAccountTabs/utils/index.ts";
+import ModalOrderDetails from "$store/components/myAccountTabs/ui/ModalOrderDetails.tsx";
+import { useState } from "preact/hooks";
 
 export interface Props extends Partial<User> {}
 
@@ -33,6 +35,22 @@ const getStatusColor = (status: string) => {
 };
 
 function MyOrdersTab({ orders = [] }: Props) {
+  const [modalOrderDetails, setModalOrderDetails] = useState<{
+    isOpen: boolean;
+    order?: Order;
+  }>({
+    isOpen: false,
+    order: undefined,
+  });
+
+  const closeModalOrderDetails = () => {
+    setModalOrderDetails({ isOpen: false, order: undefined });
+  };
+
+  const handleViewOrderDetails = (order: Order) => {
+    setModalOrderDetails({ isOpen: true, order });
+  };
+
   if (!orders.length)
     return (
       <div className="flex justify-center w-full">
@@ -65,32 +83,44 @@ function MyOrdersTab({ orders = [] }: Props) {
           </tr>
         </thead>
         <tbody>
-          {orders.map(({ id, date, price, status }, index) => (
-            <tr
-              className={
-                index !== orders.length - 1 ? "border-b border-slate-200" : ""
-              }
-            >
-              <th className="px-6 py-4 font-normal">{id}</th>
-              <td className="px-6 py-4">
-                {dateFormatter.format(new Date(date))}
-              </td>
-              <td className="px-6 py-4">{priceFormatter.format(price)}</td>
-              <td className="px-6 py-4 flex items-center gap-2">
-                <div
-                  className={`h-2 w-2 rounded-full ${getStatusColor(status)}`}
-                />
-                {getStatusLabel(status)}
-              </td>
-              <td className="px-6 py-4">
-                <button className="text-accent hover:underline">
-                  Visualizar
-                </button>
-              </td>
-            </tr>
-          ))}
+          {orders.map((order, index) => {
+            const { id, date, price, status } = order;
+
+            return (
+              <tr
+                className={
+                  index !== orders.length - 1 ? "border-b border-slate-200" : ""
+                }
+              >
+                <th className="px-6 py-4 font-normal">{id}</th>
+                <td className="px-6 py-4">
+                  {dateFormatter.format(new Date(date))}
+                </td>
+                <td className="px-6 py-4">{priceFormatter.format(price)}</td>
+                <td className="px-6 py-4 flex items-center gap-2">
+                  <div
+                    className={`h-2 w-2 rounded-full ${getStatusColor(status)}`}
+                  />
+                  {getStatusLabel(status)}
+                </td>
+                <td className="px-6 py-4">
+                  <button
+                    className="text-accent hover:underline"
+                    onClick={() => handleViewOrderDetails(order)}
+                  >
+                    Visualizar
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+      <ModalOrderDetails
+        isOpen={modalOrderDetails.isOpen}
+        closeModal={closeModalOrderDetails}
+        order={modalOrderDetails.order}
+      />
     </div>
   );
 }
