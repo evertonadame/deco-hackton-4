@@ -23,7 +23,7 @@ function MyAddressesTab({ adresses }: Props) {
 
   function excludeAdress(id: string) {
     adressArray.value = adressArray.value?.filter(
-      (adressFromArray) => adressFromArray.id !== id
+      (adressFromArray) => adressFromArray.id !== id,
     );
   }
 
@@ -80,24 +80,26 @@ function MyAddressesTab({ adresses }: Props) {
 
   return (
     <>
-      {!isEditingOrAdding.value?.value ? (
-        <div className="grid grid-cols-2 gap-6">
-          {adressArray.value?.map((adress) => (
-            <AdressCard
-              adress={adress}
-              excludeAdress={excludeAdress}
-              openEditor={openEditor}
-            />
-          ))}
-          <NewAdressCard openEditor={openEditor} />
-        </div>
-      ) : (
-        <EditAdress
-          adress={isEditingOrAdding.value.address as User["adresses"][number]}
-          closeEditor={closeEditor}
-          saveAdress={saveAdress}
-        />
-      )}
+      {!isEditingOrAdding.value?.value
+        ? (
+          <div className="flex flex-col md:flex-row flex-wrap gap-2">
+            {adressArray.value?.map((adress) => (
+              <AdressCard
+                adress={adress}
+                excludeAdress={excludeAdress}
+                openEditor={openEditor}
+              />
+            ))}
+            <NewAdressCard openEditor={openEditor} type="adress" />
+          </div>
+        )
+        : (
+          <EditAdress
+            adress={isEditingOrAdding.value.address as User["adresses"][number]}
+            closeEditor={closeEditor}
+            saveAdress={saveAdress}
+          />
+        )}
     </>
   );
 }

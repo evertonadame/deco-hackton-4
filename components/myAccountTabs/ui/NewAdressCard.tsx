@@ -14,7 +14,9 @@ function NewAdressCard({ openEditor, type }: NewAdressCardProps) {
       <picture className="p-2 flex items-center justify-center">
         <Icon id="Plus" size={24} strokeWidth={2} />
       </picture>
-      <p>Adicionar novo endereço</p>
+      <p className="text-sm font-semibold">
+        Adicionar {type === "adress" ? "endereço" : "cartão"}
+      </p>
     </button>
   );
 }
