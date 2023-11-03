@@ -1,6 +1,7 @@
 import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Card } from "$store/sections/Account/MyAccount.tsx";
+import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
 
 interface AddNewCardProps {
   closeEditor: () => void;
@@ -73,22 +74,12 @@ function AddNewCard({ closeEditor, saveCard }: AddNewCardProps) {
           value={formData.value.cvv}
         />
       </div>
-      <div className="flex md:flex-row w-full gap-6 flex-col mt-4">
-        <button
-          className="btn btn-primary md:w-1/3 w-full"
-          onClick={() => {
-            saveCard(formData.value);
-          }}
-        >
-          Salvar
-        </button>
-        <button
-          className="btn btn-secondary md:w-1/3 w-full"
-          onClick={closeEditor}
-        >
-          Voltar
-        </button>
-      </div>
+      <FormActions
+        onSaveCallback={() => {
+          saveCard(formData.value);
+        }}
+        onCancelCallback={closeEditor}
+      />
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {
   formatGender,
   formatPhone,
 } from "../utils/formatters.ts";
-import Button from "../../ui/Button.tsx";
+import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
 
 export interface Props extends Partial<User> {}
 
@@ -103,13 +103,21 @@ function MyAccountTab({
           value={formatPhone(formData?.value?.mobile ?? "")}
         />
       </div>
-      <div className="w-full mt-10">
-        <Button
-          onClick={() => (isReadingMode.value = !isReadingMode.value)}
-          class="lg:w-32 w-full btn btn-primary"
-        >
-          {isReadingMode.value ? "Editar" : "Salvar"}
-        </Button>
+      <div>
+        {!isReadingMode.value ? (
+          <FormActions
+            onCancelCallback={() => (isReadingMode.value = true)}
+            onSaveCallback={() => {}}
+          />
+        ) : (
+          <button
+            className="btn btn-primary mt-6"
+            onClick={() => (isReadingMode.value = false)}
+            class="lg:w-32 w-full btn btn-primary"
+          >
+            Editar
+          </button>
+        )}
       </div>
     </>
   );
