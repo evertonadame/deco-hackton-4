@@ -9,7 +9,7 @@ export type Props =
 
 function InputField({ label, readOnly, ...props }: Props) {
   const inputClass = readOnly
-    ? "min-h-[48px] input-disabled pl-4 w-full"
+    ? "min-h-[48px] input-disabled pl-4 w-full bg-white"
     : "input input-bordered join-item min-h-[48px] w-full";
 
   return (

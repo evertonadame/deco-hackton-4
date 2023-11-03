@@ -4,6 +4,7 @@ import { useSignal } from "@preact/signals";
 import {
   formatBirthDate,
   formatDocumentByType,
+  formatGender,
   formatPhone,
 } from "../utils/formatters.ts";
 import Button from "../../ui/Button.tsx";
@@ -53,19 +54,27 @@ function MyAccountTab({
         />
         <div className="flex flex-col">
           <label className="text-sm text-gray-600 font-semibold">Gênero</label>
-          <select
-            onChange={onChange}
-            name="gender"
-            disabled={isReadingMode.value}
-            class="input input-bordered join-item min-h-[48px] rounded-none"
-            placeholder={"Selecione"}
-            value={formData.value.gender}
-            readOnly={isReadingMode.value}
-          >
-            <option value="male">Masculino</option>
-            <option value="female">Feminino</option>
-            <option value="other">Outro</option>
-          </select>
+          {isReadingMode.value
+            ? (
+              <span className="pl-4">
+                {formatGender(formData.value.gender ?? "")}
+              </span>
+            )
+            : (
+              <select
+                onChange={onChange}
+                name="gender"
+                disabled={isReadingMode.value}
+                class="input input-bordered join-item min-h-[48px] rounded-none disabled:bg-white"
+                placeholder={"Selecione"}
+                value={formData.value.gender}
+                readOnly={isReadingMode.value}
+              >
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+                <option value="other">Outro</option>
+              </select>
+            )}
         </div>
         <InputField
           onChange={onChange}

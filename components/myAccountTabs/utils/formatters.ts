@@ -33,6 +33,17 @@ export function returnOnlyFourCardDigits(cardNumber: string) {
 
 export const dateFormatter = new Intl.DateTimeFormat("pt-BR");
 
+export function formatGender(gender: string) {
+  switch (gender) {
+    case "male":
+      return "Masculino"
+    case "female":
+      return "Feminino"
+    default:
+      return "Outro"
+  }
+}
+
 export const priceFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
