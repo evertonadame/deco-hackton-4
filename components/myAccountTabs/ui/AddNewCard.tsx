@@ -73,6 +73,10 @@ function AddNewCard({ closeEditor, saveCard, isLoading }: AddNewCardProps) {
           name="cvv"
           label="Código de segurança"
           value={formData.value.cvv}
+          maxLength={3}
+          size={2}
+          type="tel"
+          pattern="[0-9\s]{13,19}"
         />
       </div>
       <FormActions
