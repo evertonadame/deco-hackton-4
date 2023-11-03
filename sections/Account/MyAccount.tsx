@@ -23,6 +23,20 @@ export interface Card {
   default?: boolean;
 }
 
+export interface Order {
+  id: string;
+  price: number;
+  date: string;
+  status: "pending" | "approved" | "canceled";
+  items: {
+    id: string;
+    name: string;
+    quantity: number;
+    price: number;
+    image: string;
+  }[];
+}
+
 export interface User {
   id: string;
   fullName: string;
@@ -40,6 +54,7 @@ export interface User {
   };
   adresses: Address[];
   savedCards?: Card[];
+  orders?: Order[];
 }
 
 export interface Props {

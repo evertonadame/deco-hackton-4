@@ -2,6 +2,7 @@ import SmartTab from "$store/islands/SmartTab.tsx";
 import MyAccountTab from "$store/islands/MyAccount/components/MyAccountTab.tsx";
 import MyAddressesTab from "$store/islands/MyAccount/components/MyAddressesTab.tsx";
 import MyCardsTab from "$store/islands/MyAccount/components/MyCardsTab.tsx";
+import MyOrdersTab from "$store/islands/MyAccount/components/MyOrdersTab.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 
@@ -18,7 +19,7 @@ const MyAccount = ({ user }: { user: User }) => {
             },
             {
               label: "Meus Pedidos",
-              content: <div>Conteúdo Meus Pedidos</div>,
+              content: <MyOrdersTab {...user} />,
               icon: <Icon id="ShoppingCart" size={24} strokeWidth={0.1} />,
             },
             {
