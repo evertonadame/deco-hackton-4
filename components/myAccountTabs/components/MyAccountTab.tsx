@@ -53,7 +53,9 @@ function MyAccountTab({
     isReadingMode.value = true;
   };
 
-  const inputClassName = isReadingMode.value ? "py-2 bg-white" : "";
+  const inputClassName = `text-slate-600 ${
+    isReadingMode.value ? "py-2 bg-white" : ""
+  }`;
 
   return (
     <>
