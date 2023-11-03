@@ -1,4 +1,4 @@
-import NewCard from "../ui/NewAddressCard.tsx";
+import NewCard from "../ui/AddNewEntry.tsx";
 import { useSignal } from "@preact/signals";
 import CreditCard from "../ui/CreditCard.tsx";
 import type { Card, User } from "$store/sections/Account/MyAccount.tsx";
@@ -17,17 +17,6 @@ function MyCardsTab({ savedCards }: Props) {
     );
   }
 
-  function saveCard(card: Card) {
-    const { number, holder, month, year, cvv } = card ?? {};
-
-    if (!number || !holder || !month || !year || !cvv) {
-      return;
-    }
-
-    cardsArray.value = [...(cardsArray.value ?? []), card];
-    isEditingOrAdding.value = false;
-  }
-
   function openEditor() {
     isEditingOrAdding.value = true;
   }
@@ -36,8 +25,26 @@ function MyCardsTab({ savedCards }: Props) {
     isEditingOrAdding.value = false;
   }
 
+  function saveCard(card: Card) {
+    const { number, holder, month, year, cvv } = card ?? {};
+    console.log("🚀 ~ file: MyCardsTab.tsx:30 ~ saveCard ~ card:", card);
+
+    if (
+      !number.length ||
+      !holder.length ||
+      !month.length ||
+      !year.length ||
+      !cvv.length
+    ) {
+      return;
+    }
+
+    cardsArray.value = [...(cardsArray.value ?? []), card];
+    closeEditor();
+  }
+
   return (
-    <div className="flex flex-col md:flex-row flex-wrap gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
       {!isEditingOrAdding.value ? (
         <>
           {cardsArray.value?.map((card) => (

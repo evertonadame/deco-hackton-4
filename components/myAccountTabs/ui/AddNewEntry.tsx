@@ -1,11 +1,11 @@
 import Icon from "../../ui/Icon.tsx";
 
-interface NewAddressCardProps {
+interface AddNewEntryProps {
   openEditor: () => void;
   type: "address" | "card";
 }
 
-function NewAddressCard({ openEditor, type }: NewAddressCardProps) {
+function AddNewEntry({ openEditor, type }: AddNewEntryProps) {
   return (
     <button
       className="border border-slate-300 bg-slate-50 flex flex-col gap-1 p-5 relative min-h-[190px] justify-center items-center flex-1 min-w-[250px] text-slate-500 hover:bg-slate-100 hover:text-slate-600 duration-200"
@@ -21,4 +21,4 @@ function NewAddressCard({ openEditor, type }: NewAddressCardProps) {
   );
 }
 
-export default NewAddressCard;
+export default AddNewEntry;

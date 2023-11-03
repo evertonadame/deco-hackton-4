@@ -1,5 +1,5 @@
 import AddressCard from "../ui/AddressCard.tsx";
-import NewAddressCard from "../ui/NewAddressCard.tsx";
+import AddNewEntry from "../ui/AddNewEntry.tsx";
 import EditAddress from "../ui/EditAddress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
@@ -96,7 +96,7 @@ function MyAddressesTab({ addresses }: Props) {
   return (
     <>
       {!isEditingOrAdding.value?.value ? (
-        <div className="flex flex-col md:flex-row flex-wrap gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
           {addressArray.value?.map((address) => (
             <AddressCard
               address={address}
@@ -104,7 +104,7 @@ function MyAddressesTab({ addresses }: Props) {
               openEditor={openEditor}
             />
           ))}
-          <NewAddressCard openEditor={openEditor} type="address" />
+          <AddNewEntry openEditor={openEditor} type="address" />
         </div>
       ) : (
         <EditAddress

@@ -35,10 +35,13 @@ function MyAccountTab({
     formData.value = { ...formData.value, [name]: value };
   }
 
+  const inputClassName = isReadingMode.value ? "py-2 bg-white" : "";
+
   return (
     <>
       <div className="lg:grid grid-cols-2 flex flex-col lg:gap-x-7 lg:gap-y-2 gap-2">
         <InputField
+          className={inputClassName}
           onChange={onChange}
           name="fullName"
           label="Nome completo"
@@ -46,6 +49,7 @@ function MyAccountTab({
           readOnly={isReadingMode.value}
         />
         <InputField
+          className={inputClassName}
           onChange={onChange}
           name="email"
           label="Email"
@@ -54,29 +58,28 @@ function MyAccountTab({
         />
         <div className="flex flex-col">
           <label className="text-sm text-gray-600 font-semibold">Gênero</label>
-          {isReadingMode.value
-            ? (
-              <span className="pl-4">
-                {formatGender(formData.value.gender ?? "")}
-              </span>
-            )
-            : (
-              <select
-                onChange={onChange}
-                name="gender"
-                disabled={isReadingMode.value}
-                class="input input-bordered join-item min-h-[48px] rounded-none disabled:bg-white"
-                placeholder={"Selecione"}
-                value={formData.value.gender}
-                readOnly={isReadingMode.value}
-              >
-                <option value="male">Masculino</option>
-                <option value="female">Feminino</option>
-                <option value="other">Outro</option>
-              </select>
-            )}
+          {isReadingMode.value ? (
+            <span className={isReadingMode.value ? "py-2" : "p-3"}>
+              {formatGender(formData.value.gender ?? "")}
+            </span>
+          ) : (
+            <select
+              onChange={onChange}
+              name="gender"
+              disabled={isReadingMode.value}
+              class="input input-bordered join-item min-h-[48px] rounded-none disabled:bg-white"
+              placeholder={"Selecione"}
+              value={formData.value.gender}
+              readOnly={isReadingMode.value}
+            >
+              <option value="male">Masculino</option>
+              <option value="female">Feminino</option>
+              <option value="other">Outro</option>
+            </select>
+          )}
         </div>
         <InputField
+          className={inputClassName}
           onChange={onChange}
           name="document"
           label={document?.type.toUpperCase() ?? ""}
@@ -84,6 +87,7 @@ function MyAccountTab({
           value={formatDocumentByType(formData.value?.document ?? "")}
         />
         <InputField
+          className={inputClassName}
           onChange={onChange}
           name="birthDate"
           label="Data de nascimento"
@@ -91,6 +95,7 @@ function MyAccountTab({
           value={formatBirthDate(formData?.value?.birthDate ?? "")}
         />
         <InputField
+          className={inputClassName}
           onChange={onChange}
           name="mobile"
           readOnly={isReadingMode.value}
@@ -98,7 +103,7 @@ function MyAccountTab({
           value={formatPhone(formData?.value?.mobile ?? "")}
         />
       </div>
-      <div className="w-full mt-4">
+      <div className="w-full mt-10">
         <Button
           onClick={() => (isReadingMode.value = !isReadingMode.value)}
           class="lg:w-32 w-full btn btn-primary"

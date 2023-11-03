@@ -64,7 +64,7 @@ function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
       </div>
       <InputField
         onChange={onChange}
-        name="number"
+        name="district"
         label="Bairro"
         value={formData.value.district}
       />
@@ -84,18 +84,18 @@ function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
       </div>
       <div className="flex md:flex-row w-full gap-6 flex-col mt-4">
         <button
-          className="btn btn-secondary md:w-1/3 w-full"
-          onClick={closeEditor}
-        >
-          Voltar
-        </button>
-        <button
           className="btn btn-primary md:w-1/3 w-full"
           onClick={() => {
             saveAddress(formData.value);
           }}
         >
           Salvar
+        </button>
+        <button
+          className="btn btn-secondary md:w-1/3 w-full"
+          onClick={closeEditor}
+        >
+          Voltar
         </button>
       </div>
     </div>
