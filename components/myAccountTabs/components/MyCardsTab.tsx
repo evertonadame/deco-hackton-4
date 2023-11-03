@@ -18,6 +18,12 @@ function MyCardsTab({ savedCards }: Props) {
   }
 
   function saveCard(card: Card) {
+    const { number, holder, month, year, cvv } = card ?? {};
+
+    if (!number || !holder || !month || !year || !cvv) {
+      return;
+    }
+
     cardsArray.value = [...(cardsArray.value ?? []), card];
     isEditingOrAdding.value = false;
   }

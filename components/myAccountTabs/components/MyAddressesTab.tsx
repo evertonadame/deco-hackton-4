@@ -28,6 +28,21 @@ function MyAddressesTab({ addresses }: Props) {
   }
 
   function saveAddress(address: User["addresses"][number]) {
+    const { city, complement, district, number, state, street, zipCode } =
+      address ?? {};
+
+    if (
+      !zipCode ||
+      !street ||
+      !number ||
+      !district ||
+      !city ||
+      !state ||
+      !complement
+    ) {
+      return;
+    }
+
     if (!address.id) {
       address.id = Math.random().toString();
       addressArray.value = [...(addressArray.value ?? []), address];
