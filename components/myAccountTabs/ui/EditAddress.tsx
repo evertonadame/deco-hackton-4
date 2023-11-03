@@ -2,15 +2,15 @@ import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Address } from "$store/sections/Account/MyAccount.tsx";
 
-interface EditAdressProps {
-  adress: Address;
+interface EditAddressProps {
+  address: Address;
   closeEditor: () => void;
-  saveAdress: (adress: Address) => void;
+  saveAddress: (address: Address) => void;
 }
 
-function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
+function EditAddress({ address, closeEditor, saveAddress }: EditAddressProps) {
   const formData = useSignal({
-    ...adress,
+    ...address,
   });
 
   function onChange(event: Event) {
@@ -92,7 +92,7 @@ function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
         <button
           className="btn btn-primary md:w-1/3 w-full"
           onClick={() => {
-            saveAdress(formData.value);
+            saveAddress(formData.value);
           }}
         >
           Salvar
@@ -102,4 +102,4 @@ function EditAdress({ adress, closeEditor, saveAdress }: EditAdressProps) {
   );
 }
 
-export default EditAdress;
+export default EditAddress;

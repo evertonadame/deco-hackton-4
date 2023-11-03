@@ -1,18 +1,18 @@
-import AdressCard from "../ui/AdressCard.tsx";
-import NewAdressCard from "../ui/NewAdressCard.tsx";
-import EditAdress from "../ui/EditAdress.tsx";
+import AddressCard from "../ui/AddressCard.tsx";
+import NewAddressCard from "../ui/NewAddressCard.tsx";
+import EditAddress from "../ui/EditAddress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 
 export interface Props extends Partial<User> {}
 
-function MyAddressesTab({ adresses }: Props) {
+function MyAddressesTab({ addresses }: Props) {
   const isEditingOrAdding = useSignal({
     value: false,
-    address: null as null | User["adresses"][number],
+    address: null as null | User["addresses"][number],
   });
 
-  const adressArray = useSignal(adresses);
+  const addressArray = useSignal(addresses);
 
   function closeEditor() {
     isEditingOrAdding.value = {
@@ -21,16 +21,16 @@ function MyAddressesTab({ adresses }: Props) {
     };
   }
 
-  function excludeAdress(id: string) {
-    adressArray.value = adressArray.value?.filter(
-      (adressFromArray) => adressFromArray.id !== id,
+  function excludeAddress(id: string) {
+    addressArray.value = addressArray.value?.filter(
+      (addressFromArray) => addressFromArray.id !== id
     );
   }
 
-  function saveAdress(adress: User["adresses"][number]) {
-    if (!adress.id) {
-      adress.id = Math.random().toString();
-      adressArray.value = [...(adressArray.value ?? []), adress];
+  function saveAddress(address: User["addresses"][number]) {
+    if (!address.id) {
+      address.id = Math.random().toString();
+      addressArray.value = [...(addressArray.value ?? []), address];
       isEditingOrAdding.value = {
         value: false,
         address: null,
@@ -38,15 +38,15 @@ function MyAddressesTab({ adresses }: Props) {
       return;
     }
 
-    const newAdressArray = adressArray.value?.map((adressFromArray) => {
-      if (adressFromArray.id === adress.id) {
-        return adress;
+    const newAddressArray = addressArray.value?.map((addressFromArray) => {
+      if (addressFromArray.id === address.id) {
+        return address;
       }
 
-      return adressFromArray;
+      return addressFromArray;
     });
 
-    adressArray.value = newAdressArray;
+    addressArray.value = newAddressArray;
 
     isEditingOrAdding.value = {
       value: false,
@@ -54,7 +54,7 @@ function MyAddressesTab({ adresses }: Props) {
     };
   }
 
-  function openEditor(address?: User["adresses"][number]) {
+  function openEditor(address?: User["addresses"][number]) {
     if (!address) {
       isEditingOrAdding.value = {
         value: true,
@@ -80,26 +80,24 @@ function MyAddressesTab({ adresses }: Props) {
 
   return (
     <>
-      {!isEditingOrAdding.value?.value
-        ? (
-          <div className="flex flex-col md:flex-row flex-wrap gap-2">
-            {adressArray.value?.map((adress) => (
-              <AdressCard
-                adress={adress}
-                excludeAdress={excludeAdress}
-                openEditor={openEditor}
-              />
-            ))}
-            <NewAdressCard openEditor={openEditor} type="adress" />
-          </div>
-        )
-        : (
-          <EditAdress
-            adress={isEditingOrAdding.value.address as User["adresses"][number]}
-            closeEditor={closeEditor}
-            saveAdress={saveAdress}
-          />
-        )}
+      {!isEditingOrAdding.value?.value ? (
+        <div className="flex flex-col md:flex-row flex-wrap gap-2">
+          {addressArray.value?.map((address) => (
+            <AddressCard
+              address={address}
+              excludeAddress={excludeAddress}
+              openEditor={openEditor}
+            />
+          ))}
+          <NewAddressCard openEditor={openEditor} type="address" />
+        </div>
+      ) : (
+        <EditAddress
+          address={isEditingOrAdding.value.address as User["addresses"][number]}
+          closeEditor={closeEditor}
+          saveAddress={saveAddress}
+        />
+      )}
     </>
   );
 }
