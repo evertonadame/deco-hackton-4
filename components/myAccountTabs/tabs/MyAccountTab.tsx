@@ -7,7 +7,7 @@ import {
   formatGender,
   formatPhone,
 } from "../utils/formatters.ts";
-import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
+import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 
 export interface Props extends Partial<User> {}

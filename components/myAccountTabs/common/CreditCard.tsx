@@ -1,6 +1,6 @@
 import type { Card } from "$store/sections/Account/MyAccount.tsx";
-import DefaultFlag from "$store/components/myAccountTabs/ui/DefaultFlag.tsx";
-import CardActions from "$store/components/myAccountTabs/ui/CardActions.tsx";
+import DefaultFlag from "$store/components/myAccountTabs/common/DefaultFlag.tsx";
+import CardActions from "$store/components/myAccountTabs/common/CardActions.tsx";
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 
 interface CardProps {

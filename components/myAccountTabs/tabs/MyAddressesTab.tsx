@@ -1,6 +1,6 @@
-import AddressCard from "../ui/AddressCard.tsx";
-import AddNewEntry from "../ui/AddNewEntry.tsx";
-import EditAddress from "../ui/EditAddress.tsx";
+import AddressCard from "../common/AddressCard.tsx";
+import AddNewEntry from "../common/AddNewEntry.tsx";
+import EditAddress from "../common/EditAddress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";

@@ -3,7 +3,7 @@ import {
   dateFormatter,
   priceFormatter,
 } from "$store/components/myAccountTabs/utils/formatters.ts";
-import OrderDetails from "$store/components/myAccountTabs/ui/OrderDetails.tsx";
+import OrderDetails from "$store/components/myAccountTabs/common/OrderDetails.tsx";
 import { getStatusLabel } from "$store/components/myAccountTabs/utils/orderDetails.ts";
 import { useSignal } from "@preact/signals";
 

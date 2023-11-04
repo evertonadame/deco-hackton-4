@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Card } from "$store/sections/Account/MyAccount.tsx";
-import FormActions from "$store/components/myAccountTabs/ui/FormActions.tsx";
+import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 
 interface AddNewCardProps {
   closeEditor: () => void;

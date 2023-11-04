@@ -1,5 +1,3 @@
-import Icon from "../../ui/Icon.tsx";
-
 interface CardActionsProps {
   editCallback?: () => void;
   excludeCallback?: () => void;

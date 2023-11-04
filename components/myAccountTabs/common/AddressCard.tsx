@@ -1,6 +1,6 @@
 import type { Address } from "$store/sections/Account/MyAccount.tsx";
-import DefaultFlag from "$store/components/myAccountTabs/ui/DefaultFlag.tsx";
-import CardActions from "$store/components/myAccountTabs/ui/CardActions.tsx";
+import DefaultFlag from "$store/components/myAccountTabs/common/DefaultFlag.tsx";
+import CardActions from "$store/components/myAccountTabs/common/CardActions.tsx";
 
 interface AddressCardProps {
   address: Address;

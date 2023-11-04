@@ -1,8 +1,8 @@
-import NewCard from "../ui/AddNewEntry.tsx";
+import NewCard from "../common/AddNewEntry.tsx";
 import { useSignal } from "@preact/signals";
-import CreditCard from "../ui/CreditCard.tsx";
+import CreditCard from "../common/CreditCard.tsx";
 import type { Card, User } from "$store/sections/Account/MyAccount.tsx";
-import AddNewCard from "../ui/AddNewCard.tsx";
+import AddNewCard from "../common/AddNewCard.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 
 export interface Props extends Partial<User> {}

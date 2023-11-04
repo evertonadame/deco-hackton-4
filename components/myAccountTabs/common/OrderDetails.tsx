@@ -1,5 +1,5 @@
 import type { Order } from "$store/sections/Account/MyAccount.tsx";
-import HistoryComponent from "$store/components/myAccountTabs/ui/HistoryComponent.tsx";
+import HistoryComponent from "$store/components/myAccountTabs/common/HistoryComponent.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import {
   dateFormatter,
