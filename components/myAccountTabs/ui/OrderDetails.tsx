@@ -5,7 +5,10 @@ import {
   dateFormatter,
   priceFormatter,
 } from "$store/components/myAccountTabs/utils/formatters.ts";
-import { getStatusLabel } from "$store/components/myAccountTabs/utils/orderDetails.ts";
+import {
+  getPaymentMethodLabel,
+  getStatusLabel,
+} from "$store/components/myAccountTabs/utils/orderDetails.ts";
 import Image from "apps/website/components/Image.tsx";
 
 interface OrderDetailsProps {
@@ -14,7 +17,7 @@ interface OrderDetailsProps {
   order?: Order;
 }
 
-function ModalOrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
+function OrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
   return isOpen && order ? (
     <div className="bg-white flex flex-col gap-10">
       <div className="flex gap-2 items-center text-lg lg:text-xl">
@@ -34,6 +37,10 @@ function ModalOrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
         <p>
           <span className="font-semibold">Valor total:</span>{" "}
           {priceFormatter.format(order.price)}
+        </p>
+        <p>
+          <span className="font-semibold">Método de pagamento:</span>{" "}
+          {getPaymentMethodLabel(order.paymentMethod)}
         </p>
         <p>
           <span className="font-semibold">Status:</span>{" "}
@@ -68,4 +75,4 @@ function ModalOrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
   ) : null;
 }
 
-export default ModalOrderDetails;
+export default OrderDetails;

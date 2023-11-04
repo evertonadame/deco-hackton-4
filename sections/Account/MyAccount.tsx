@@ -28,7 +28,7 @@ export interface Order {
   price: number;
   date: string;
   status: "pending" | "approved" | "canceled";
-  paymentType: "creditCard" | "boleto" | "pix" | "voucher" | "debitCard";
+  paymentMethod: "creditCard" | "boleto" | "pix" | "voucher" | "debitCard";
   deliveries: {
     id: string;
     history: {
