@@ -48,11 +48,6 @@ function MyOrdersTab({ orders = [] }: Props) {
     );
   }
 
-  console.log(
-    "🚀 ~ file: MyOrdersTab.tsx:27 ~ MyOrdersTab ~ orderDetails:",
-    orderDetails.value
-  );
-
   return orderDetails.value.isOpen ? (
     <OrderDetails
       isOpen={orderDetails.value.isOpen}

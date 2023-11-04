@@ -1,11 +1,9 @@
 import type { JSX } from "preact";
 
-export type Props =
-  & JSX.IntrinsicElements["input"]
-  & {
-    label?: string;
-    readonly?: boolean;
-  };
+export type Props = JSX.IntrinsicElements["input"] & {
+  label?: string;
+  readonly?: boolean;
+};
 
 function InputField({ label, readOnly, ...props }: Props) {
   const inputClass = readOnly
@@ -14,14 +12,8 @@ function InputField({ label, readOnly, ...props }: Props) {
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm text-gray-600 font-semibold">
-        {label}
-      </label>
-      <input
-        disabled={readOnly}
-        class={inputClass}
-        {...props}
-      />
+      <label className="text-sm text-slate-600 font-semibold">{label}</label>
+      <input disabled={readOnly} class={inputClass} {...props} />
     </div>
   );
 }

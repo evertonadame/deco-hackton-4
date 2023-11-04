@@ -2,6 +2,11 @@ import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Card } from "$store/sections/Account/MyAccount.tsx";
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
+import { maskCreditCardNumber } from "$store/components/myAccountTabs/utils/masks/credit-card.ts";
+import {
+  maskOnlyNumber,
+  maskTextValue,
+} from "$store/components/myAccountTabs/utils/masks/common.ts";
 
 interface AddNewCardProps {
   closeEditor: () => void;
@@ -9,12 +14,30 @@ interface AddNewCardProps {
   isLoading: boolean;
 }
 
-function AddNewCard({ closeEditor, saveCard, isLoading }: AddNewCardProps) {
+function AddNewCard({
+  closeEditor,
+  saveCard,
+  isLoading,
+}: Readonly<AddNewCardProps>) {
   const formData = useSignal({} as Card);
 
   function onChange(event: Event) {
     const { name, value } = event.target as HTMLInputElement;
-    formData.value = { ...formData.value, [name]: value };
+
+    let maskedValue = value;
+
+    switch (name) {
+      case "number":
+        maskedValue = maskCreditCardNumber(value);
+        break;
+      case "holder":
+        maskedValue = maskTextValue(value);
+        break;
+      default:
+        maskedValue = maskOnlyNumber(value);
+    }
+
+    formData.value = { ...formData.value, [name]: maskedValue };
   }
 
   return (
@@ -39,32 +62,32 @@ function AddNewCard({ closeEditor, saveCard, isLoading }: AddNewCardProps) {
       />
       <div className="flex flex-row gap-4 w-full">
         <div className="flex flex-col">
-          <label className="text-sm text-gray-600 font-semibold">
+          <label className="text-sm text-slate-600 font-semibold">
             Validade
           </label>
-          <div class="input input-bordered join-item min-h-[48px] w-full flex items-center justify-center gap-2">
+          <div className="input input-bordered join-item min-h-[48px] w-full flex items-center justify-center gap-2 text-slate-600">
             <input
               onChange={onChange}
-              className="w-7"
               name="month"
+              className="w-7"
               placeholder="MM"
               type="tel"
-              inputMode="numeric"
               pattern="[0-9\s]{13,19}"
               maxLength={2}
               size={2}
+              value={formData.value.month}
             />
-            <span>/</span>
+            <span className="text-slate-600">/</span>
             <input
               onChange={onChange}
+              name="year"
               className="w-7"
               type="tel"
-              inputMode="numeric"
               pattern="[0-9\s]{13,19}"
-              name="year"
               placeholder="YY"
               maxLength={2}
               size={2}
+              value={formData.value.year}
             />
           </div>
         </div>
