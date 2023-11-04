@@ -82,6 +82,7 @@ function MyAddressesTab({ addresses }: Props) {
   };
 
   function openEditor(address?: User["addresses"][number]) {
+
     if (!address) {
       isEditingOrAdding.value = {
         value: true,

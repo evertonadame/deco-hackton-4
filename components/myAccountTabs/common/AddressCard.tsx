@@ -1,6 +1,7 @@
 import type { Address } from "$store/sections/Account/MyAccount.tsx";
 import DefaultFlag from "$store/components/myAccountTabs/common/DefaultFlag.tsx";
 import CardActions from "$store/components/myAccountTabs/common/CardActions.tsx";
+import { maskZipCode } from "$store/components/myAccountTabs/utils/masks/common.ts";
 
 interface AddressCardProps {
   address: Address;
@@ -21,7 +22,7 @@ function AddressCard({
           {address.complement}.
         </p>
         <p className="text-sm text-slate-500">
-          {address.city}, {address.state} - {address.zipCode}
+          {address.city}, {address.state} - {maskZipCode(address.zipCode)}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between gap-4">
