@@ -49,7 +49,7 @@ function OrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
       </div>
       <div className="flex flex-col gap-2">
         {order.items.map((item) => (
-          <div className="flex gap-6 border border-slate-200 p-2">
+          <div className="flex gap-6 border border-slate-200 p-2" key={item.id}>
             <div className="w-full max-w-[80px]">
               <Image
                 src={item.image}

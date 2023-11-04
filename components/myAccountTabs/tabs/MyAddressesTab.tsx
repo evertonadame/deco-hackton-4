@@ -111,6 +111,7 @@ function MyAddressesTab({ addresses }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
           {addressArray.value?.map((address) => (
             <AddressCard
+              key={address.id}
               address={address}
               excludeAddress={excludeAddress}
               openEditor={openEditor}
