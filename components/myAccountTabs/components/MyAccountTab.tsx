@@ -53,8 +53,8 @@ function MyAccountTab({
     isReadingMode.value = true;
   };
 
-  const inputClassName = `text-slate-600 ${
-    isReadingMode.value ? "py-2 bg-white" : ""
+  const inputClassName = `w-full text-slate-600 bg-white ${
+    isReadingMode.value ? "py-2" : "input input-bordered join-item"
   }`;
 
   return (
