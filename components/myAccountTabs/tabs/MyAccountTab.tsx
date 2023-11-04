@@ -2,13 +2,11 @@ import InputField from "$store/components/ui/InputField.tsx";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { useSignal } from "@preact/signals";
 import {
-  formatBirthDate,
-  formatDocumentByType,
   formatGender,
-  formatPhone,
 } from "../utils/formatters.ts";
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
+import { maskCpf, maskInputDate, maskPhone } from "../utils/masks/common.ts";
 
 export interface Props extends Partial<User> {}
 
@@ -34,7 +32,23 @@ function MyAccountTab({
 
   const onChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
-    formData.value = { ...formData.value, [name]: value };
+
+    let maskedValue = value
+
+    switch (name) {
+      case "birthDate":
+        maskedValue = maskInputDate(value);
+        break;
+      case "document":
+        maskedValue = maskCpf(value);
+        break;
+      case "mobile":
+        maskedValue = maskPhone(value);
+      default:
+        maskedValue = value;
+    }
+
+    formData.value = { ...formData.value, [name]: maskedValue };
   };
 
   const handleOnSave = async () => {
@@ -71,6 +85,7 @@ function MyAccountTab({
         <InputField
           className={inputClassName}
           onChange={onChange}
+          type="email"
           name="email"
           label="Email"
           value={formData.value.email}
@@ -103,24 +118,27 @@ function MyAccountTab({
           onChange={onChange}
           name="document"
           label={document?.type.toUpperCase() ?? ""}
+          maxLength={14}
           readOnly={isReadingMode.value}
-          value={formatDocumentByType(formData.value?.document ?? "")}
+          value={maskCpf(formData.value?.document ?? "")}
         />
         <InputField
           className={inputClassName}
           onChange={onChange}
+          maxLength={10}
           name="birthDate"
           label="Data de nascimento"
           readOnly={isReadingMode.value}
-          value={formatBirthDate(formData?.value?.birthDate ?? "")}
+          value={maskInputDate(formData?.value?.birthDate ?? "")}
         />
         <InputField
           className={inputClassName}
           onChange={onChange}
           name="mobile"
+          maxLength={15}
           readOnly={isReadingMode.value}
           label="Celular"
-          value={formatPhone(formData?.value?.mobile ?? "")}
+          value={maskPhone(formData?.value?.mobile ?? "")}
         />
       </div>
       <div>

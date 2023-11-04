@@ -2,6 +2,7 @@ import { useSignal } from "@preact/signals";
 import InputField from "../../ui/InputField.tsx";
 import type { Address } from "$store/sections/Account/MyAccount.tsx";
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
+import { maskZipCode } from "../utils/masks/common.ts";
 
 interface EditAddressProps {
   address: Address;
@@ -37,7 +38,17 @@ function EditAddress({
         });
     }
 
-    formData.value = { ...formData.value, [name]: value };
+    let maskedValue = value;
+
+    switch(name) {
+      case 'zipCode':
+        maskedValue = maskZipCode(value);
+        break;
+      default:
+        maskedValue = value;
+    }
+
+    formData.value = { ...formData.value, [name]: maskedValue };
   }
 
   return (
@@ -46,8 +57,8 @@ function EditAddress({
         onChange={onChange}
         name="zipCode"
         label="CEP"
-        maxLength={8}
-        value={formData.value.zipCode}
+        maxLength={9}
+        value={maskZipCode(formData.value.zipCode)}
       />
       <InputField
         onChange={onChange}
