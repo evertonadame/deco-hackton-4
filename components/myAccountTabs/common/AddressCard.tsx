@@ -15,7 +15,7 @@ function AddressCard({
   excludeAddress,
 }: AddressCardProps) {
   return (
-    <div className="border border-slate-300 flex flex-col gap-10 justify-between p-5 relative flex-1 min-w-[250px]">
+    <div className="border border-slate-200 flex flex-col gap-10 justify-between p-5 relative flex-1 min-w-[250px]">
       <div className="flex flex-col gap-1">
         <p className="text-md uppercase">
           {address.district}. {address.street}, {address.number}.{" "}

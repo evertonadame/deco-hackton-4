@@ -21,7 +21,7 @@ const StatusBadge = ({ status }: { status: StatusBadgeProps }) => {
     }
   };
 
-  return <div className={`w-5 h-5 rounded-full ${getStatusColor(status)}`} />;
+  return <div className={`w-3 h-3 rounded-full ${getStatusColor(status)}`} />;
 };
 
 export default StatusBadge;

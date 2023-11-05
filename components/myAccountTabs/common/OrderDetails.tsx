@@ -19,7 +19,7 @@ interface OrderDetailsProps {
 
 function OrderDetails({ isOpen, closeModal, order }: OrderDetailsProps) {
   return isOpen && order ? (
-    <div className="bg-white flex flex-col gap-10">
+    <div className="bg-white flex flex-col gap-8">
       <div className="flex gap-2 items-center text-lg lg:text-xl">
         <button className="p-1" onClick={closeModal}>
           <Icon id="ChevronLeft" size={24} strokeWidth={2} />
