@@ -1,4 +1,14 @@
-const Spin = () => {
+interface Props {
+  size?: "small" | "medium" | "large";
+}
+
+const Spin = ({ size = "medium" }: Props) => {
+  const sizeStyles = {
+    small: "h-4 w-4",
+    medium: "h-5 w-5",
+    large: "h-6 w-6",
+  };
+
   return (
     <div
       role="status"
@@ -6,7 +16,7 @@ const Spin = () => {
       data-cid="spin"
     >
       <svg
-        className="animate-spin inline fill-white text-slate-400 h-5 w-5"
+        className={`animate-spin inline fill-white text-slate-400 ${sizeStyles[size]}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -41,3 +41,38 @@
     --dot-progress: 100%
   }
 }
+
+/* UI Toast styles */
+#ui-toast {
+  animation: fade-in 0.3s ease;
+}
+#ui-toast.fade-out {
+  @apply opacity-0;
+}
+#ui-toast.success {
+  @apply bg-green-50 border-green-400 text-green-800;
+}
+#ui-toast.error {
+  @apply bg-red-50 border-red-400 text-red-800;
+}
+#ui-toast.warning {
+  @apply bg-yellow-50 border-yellow-400 text-yellow-800;
+}
+#toast-close-button.success {
+  @apply stroke-green-400 hover:stroke-green-600 hover:bg-green-100;
+}
+#toast-close-button.error {
+  @apply stroke-red-400 hover:stroke-red-600 hover:bg-red-100;
+}
+#toast-close-button.warning {
+  @apply stroke-yellow-400 hover:stroke-yellow-600 hover:bg-yellow-100;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

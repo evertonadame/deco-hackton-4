@@ -1,12 +1,11 @@
 import InputField from "$store/components/ui/InputField.tsx";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { useSignal } from "@preact/signals";
-import {
-  formatGender,
-} from "../utils/formatters.ts";
+import { formatGender } from "../utils/formatters.ts";
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 import { maskCpf, maskInputDate, maskPhone } from "../utils/masks/common.ts";
+import { showToast } from "$store/components/myAccountTabs/utils/toast.ts";
 import Newsletter from "../common/Newsletter.tsx";
 
 export interface Props extends Partial<User> {}
@@ -34,7 +33,7 @@ function MyAccountTab({
   const onChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
 
-    let maskedValue = value
+    let maskedValue = value;
 
     switch (name) {
       case "birthDate":
@@ -45,6 +44,7 @@ function MyAccountTab({
         break;
       case "mobile":
         maskedValue = maskPhone(value);
+        break;
       default:
         maskedValue = value;
     }
@@ -64,6 +64,11 @@ function MyAccountTab({
     } finally {
       isLoading.value = false;
     }
+
+    showToast({
+      message: "Dados salvos com sucesso!",
+      variant: "success",
+    });
 
     isReadingMode.value = true;
   };
@@ -159,9 +164,11 @@ function MyAccountTab({
           </button>
         )}
       </div>
-      <div>
-         <Newsletter email={formData.value.email} />
-      </div>
+      {formData.value.email ? (
+        <div>
+          <Newsletter email={formData.value.email} />
+        </div>
+      ) : null}
     </>
   );
 }
