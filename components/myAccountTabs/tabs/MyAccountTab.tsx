@@ -8,6 +8,7 @@ import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx"
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 import { maskCpf, maskInputDate, maskPhone } from "../utils/masks/common.ts";
 import Newsletter from "../common/Newsletter.tsx";
+import { validateDataError, validateField } from "../utils/validator/validate-fields.tsx";
 
 export interface Props extends Partial<User> {}
 
@@ -19,22 +20,25 @@ function MyAccountTab({
   email,
   gender,
 }: Props) {
-  const isReadingMode = useSignal(true);
-  const isLoading = useSignal(false);
-
-  const formData = useSignal({
+  const initialFormData = {
     fullName,
     birthDate,
     document: document?.number,
     gender,
     mobile: contacts?.mobile,
     email,
-  });
+  }
+  const isReadingMode = useSignal(true);
+  const isLoading = useSignal(false);
+
+  const formData = useSignal(initialFormData);
 
   const onChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
+    const { name, value, required } = event.target as HTMLInputElement;
 
     let maskedValue = value
+
+    const validation = validateField(name, value, required);
 
     switch (name) {
       case "birthDate":
@@ -49,10 +53,17 @@ function MyAccountTab({
         maskedValue = value;
     }
 
-    formData.value = { ...formData.value, [name]: maskedValue };
+    formData.value = { ...formData.value, [name]: maskedValue,  [`${name}Error`]: validation.error };
   };
 
+
   const handleOnSave = async () => {
+    const hasErrors = validateDataError(formData.value);
+
+    if(hasErrors) {
+      return;
+    }
+
     isLoading.value = true;
 
     try {
@@ -74,13 +85,15 @@ function MyAccountTab({
 
   return (
     <>
-      <div className="lg:grid grid-cols-2 flex flex-col lg:gap-x-7 lg:gap-y-2 gap-2">
+      <div className="lg:grid grid-cols-2 flex flex-col lg:gap-x-7 lg:gap-y-4 gap-6">
         <InputField
           className={inputClassName}
           onChange={onChange}
           name="fullName"
+          required
           label="Nome completo"
           value={formData.value.fullName}
+          error={formData.value.fullNameError}
           readOnly={isReadingMode.value}
         />
         <InputField
@@ -88,8 +101,10 @@ function MyAccountTab({
           onChange={onChange}
           type="email"
           name="email"
+          required
           label="Email"
           value={formData.value.email}
+          error={formData.value.emailError}
           readOnly={isReadingMode.value}
         />
         <div className="flex flex-col">
@@ -118,8 +133,10 @@ function MyAccountTab({
           className={inputClassName}
           onChange={onChange}
           name="document"
+          error={formData.value.documentError}
           label={document?.type.toUpperCase() ?? ""}
           maxLength={14}
+          required
           readOnly={isReadingMode.value}
           value={maskCpf(formData.value?.document ?? "")}
         />
@@ -128,7 +145,9 @@ function MyAccountTab({
           onChange={onChange}
           maxLength={10}
           name="birthDate"
+          required
           label="Data de nascimento"
+          error={formData.value.birthDateError}
           readOnly={isReadingMode.value}
           value={maskInputDate(formData?.value?.birthDate ?? "")}
         />
@@ -136,7 +155,9 @@ function MyAccountTab({
           className={inputClassName}
           onChange={onChange}
           name="mobile"
+          error={formData?.value?.mobileError}
           maxLength={15}
+          required
           readOnly={isReadingMode.value}
           label="Celular"
           value={maskPhone(formData?.value?.mobile ?? "")}
@@ -145,7 +166,10 @@ function MyAccountTab({
       <div>
         {!isReadingMode.value ? (
           <FormActions
-            onCancelCallback={() => (isReadingMode.value = true)}
+            onCancelCallback={() => {
+              isReadingMode.value = true;
+              formData.value = initialFormData;
+            }}
             onSaveCallback={handleOnSave}
             isLoading={isLoading.value}
           />
@@ -159,9 +183,7 @@ function MyAccountTab({
           </button>
         )}
       </div>
-      <div>
-         <Newsletter email={formData.value.email} />
-      </div>
+      <Newsletter email={formData.value.email} />
     </>
   );
 }

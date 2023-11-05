@@ -7,6 +7,7 @@ import {
   maskOnlyNumber,
   maskTextValue,
 } from "$store/components/myAccountTabs/utils/masks/common.ts";
+import { validateField } from "../utils/validator/validate-fields.tsx";
 
 interface AddNewCardProps {
   closeEditor: () => void;
@@ -22,8 +23,9 @@ function AddNewCard({
   const formData = useSignal({} as Card);
 
   function onChange(event: Event) {
-    const { name, value } = event.target as HTMLInputElement;
+    const { name, value, required } = event.target as HTMLInputElement;
 
+    const validation = validateField(name, value, required);
     let maskedValue = value;
 
     switch (name) {
@@ -37,17 +39,19 @@ function AddNewCard({
         maskedValue = maskOnlyNumber(value);
     }
 
-    formData.value = { ...formData.value, [name]: maskedValue };
+    formData.value = { ...formData.value, [name]: maskedValue, [`${name}Error`]: validation.error };
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-4 w-full">
       <InputField
         onChange={onChange}
         name="number"
         label="Número do cartão"
+        error={formData.value.numberError}
         maxLength={19}
         type="tel"
+        required
         inputMode="numeric"
         pattern="[0-9\s]{13,19}"
         autocomplete="cc-number"
@@ -56,7 +60,9 @@ function AddNewCard({
       />
       <InputField
         onChange={onChange}
+        error={formData.value.holderError}
         name="holder"
+        required
         label="Nome impresso no cartão"
         value={formData.value.holder}
       />
@@ -96,6 +102,8 @@ function AddNewCard({
           name="cvv"
           label="Código de segurança"
           value={formData.value.cvv}
+          required
+          error={formData.value.cvvError}
           maxLength={3}
           size={2}
           type="tel"

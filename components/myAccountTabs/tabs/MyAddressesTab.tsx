@@ -4,6 +4,7 @@ import EditAddress from "../common/EditAddress.tsx";
 import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
+import { validateDataError } from "../utils/validator/validate-fields.tsx";
 
 export interface Props extends Partial<User> {}
 
@@ -45,7 +46,7 @@ function MyAddressesTab({ addresses }: Props) {
   };
 
   const saveAddress = (address: User["addresses"][number]) => {
-    const { city, complement, district, number, state, street, zipCode } =
+    const { city, district, number, state, street, zipCode } =
       address ?? {};
 
     if (
@@ -54,10 +55,15 @@ function MyAddressesTab({ addresses }: Props) {
       !number ||
       !district ||
       !city ||
-      !state ||
-      !complement
+      !state
     ) {
       return;
+    }
+
+    const hasErrors = validateDataError(address);
+
+    if(hasErrors){
+      return
     }
 
     if (!address.id) {
