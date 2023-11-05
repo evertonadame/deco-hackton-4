@@ -189,7 +189,7 @@ function MyAccountTab({
         )}
       </div>
       {formData.value.email ? (
-          <Newsletter email={formData.value.email} />;
+          <Newsletter email={formData.value.email} />
       ) : null}
     </>
   );
