@@ -1,12 +1,11 @@
 import InputField from "$store/components/ui/InputField.tsx";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { useSignal } from "@preact/signals";
-import {
-  formatGender,
-} from "../utils/formatters.ts";
+import { formatGender } from "../utils/formatters.ts";
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 import { maskCpf, maskInputDate, maskPhone } from "../utils/masks/common.ts";
+import { showToast } from "$store/components/myAccountTabs/utils/toast.ts";
 import Newsletter from "../common/Newsletter.tsx";
 import { validateDataError, validateField } from "../utils/validator/validate-fields.tsx";
 
@@ -36,7 +35,7 @@ function MyAccountTab({
   const onChange = (event: Event) => {
     const { name, value, required } = event.target as HTMLInputElement;
 
-    let maskedValue = value
+    let maskedValue = value;
 
     const validation = validateField(name, value, required);
 
@@ -49,6 +48,7 @@ function MyAccountTab({
         break;
       case "mobile":
         maskedValue = maskPhone(value);
+        break;
       default:
         maskedValue = value;
     }
@@ -75,6 +75,11 @@ function MyAccountTab({
     } finally {
       isLoading.value = false;
     }
+
+    showToast({
+      message: "Dados salvos com sucesso!",
+      variant: "success",
+    });
 
     isReadingMode.value = true;
   };
@@ -183,7 +188,9 @@ function MyAccountTab({
           </button>
         )}
       </div>
-      <Newsletter email={formData.value.email} />
+      {formData.value.email ? (
+          <Newsletter email={formData.value.email} />;
+      ) : null}
     </>
   );
 }

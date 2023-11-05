@@ -5,6 +5,7 @@ import { useSignal } from "@preact/signals";
 import type { User } from "$store/sections/Account/MyAccount.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 import { validateDataError } from "../utils/validator/validate-fields.tsx";
+import { showToast } from "$store/components/myAccountTabs/utils/toast.ts";
 
 export interface Props extends Partial<User> {}
 
@@ -36,6 +37,11 @@ function MyAddressesTab({ addresses }: Props) {
       isLoading.value = false;
     }
 
+    showToast({
+      message: "Dados salvos com sucesso!",
+      variant: "success",
+    });
+
     closeEditor();
   };
 
@@ -57,6 +63,11 @@ function MyAddressesTab({ addresses }: Props) {
       !city ||
       !state
     ) {
+      showToast({
+        message: "Dados inválidos!",
+        variant: "error",
+      });
+
       return;
     }
 
@@ -88,7 +99,6 @@ function MyAddressesTab({ addresses }: Props) {
   };
 
   function openEditor(address?: User["addresses"][number]) {
-
     if (!address) {
       isEditingOrAdding.value = {
         value: true,
