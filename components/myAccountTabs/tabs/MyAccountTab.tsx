@@ -65,7 +65,7 @@ function MyAccountTab({
 
     showToast({
       message: "Dados salvos com sucesso!",
-      variant: "success",
+      variant: "error",
     });
 
     isReadingMode.value = true;

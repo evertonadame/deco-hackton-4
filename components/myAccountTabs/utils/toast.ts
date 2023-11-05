@@ -3,37 +3,36 @@ interface ToastProps {
   message: string;
 }
 
-const closeToast = (toast: HTMLElement) => {
+const fadeOut = async (toast: HTMLElement) => {
+  toast.classList.add("fade-out");
+  await new Promise((resolve) => setTimeout(resolve, 300));
+};
+
+const closeToast = async (toast: HTMLElement) => {
+  await fadeOut(toast);
+
   toast.classList.remove("flex");
   toast.classList.add("hidden");
+  toast.classList.remove("fade-out");
 };
 
 export const showToast = ({
   variant,
   message,
 }: ToastProps) => {
-  let toast: HTMLElement | null;
+  const toast = document.getElementById("ui-toast");
+  const toastCloseButton = toast?.querySelector("#toast-close-button");
 
-  switch (variant) {
-    case "success":
-      toast = document.getElementById("toast-success");
-      break;
-    case "error":
-      toast = document.getElementById("toast-danger");
-      break;
-    case "warning":
-      toast = document.getElementById("toast-warning");
-      break;
-  }
+  if (!toast || !toastCloseButton) return;
 
-  if (!toast) return;
+  toast.classList.add(variant);
+  toastCloseButton.classList.add(variant);
 
   const toastMessage = toast.querySelector(".toast-message");
-  const closeToasterButton = toast.querySelector("#toast-close-button");
 
-  if (!toastMessage || !closeToasterButton) return;
+  if (!toastMessage || !toastCloseButton) return;
 
-  closeToasterButton.addEventListener("click", () => {
+  toastCloseButton.addEventListener("click", () => {
     if (!toast) return;
 
     closeToast(toast);

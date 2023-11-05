@@ -1,21 +1,18 @@
 import Icon from "$store/components/ui/Icon.tsx";
-import { useSignal } from "@preact/signals";
 
-interface Props {}
-
-function Toast({}: Props) {
+function Toast() {
   return (
     <div
-      id="toast-success"
-      className="items-center w-fit px-4 py-2 border bg-green-50 border-green-400 text-green-800 rounded-lg fixed top-6 left-0 right-0 mx-auto lg:top-24 z-50 hidden shadow-lg gap-4"
+      id="ui-toast"
+      className="items-center w-fit px-4 py-2 border rounded-lg fixed top-6 left-0 right-0 mx-auto lg:top-24 z-50 hidden shadow-lg gap-4 duration-300 opacity-100"
       role="alert"
     >
       <div className="text-sm font-normal toast-message">
-        Item moved successfully.
+        Toast default message.
       </div>
       <button
         type="button"
-        className="stroke-green-400 hover:stroke-green-600 rounded-lg p-2 hover:bg-green-100 inline-flex items-center justify-center duration-200"
+        className="rounded-lg p-2 inline-flex items-center justify-center duration-200"
         data-dismiss-target="#toast-success"
         id="toast-close-button"
         aria-label="Close"
