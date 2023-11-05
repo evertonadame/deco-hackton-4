@@ -43,6 +43,7 @@ function MyAccountTab({
         break;
       case "mobile":
         maskedValue = maskPhone(value);
+        break;
       default:
         maskedValue = value;
     }
@@ -65,7 +66,7 @@ function MyAccountTab({
 
     showToast({
       message: "Dados salvos com sucesso!",
-      variant: "error",
+      variant: "success",
     });
 
     isReadingMode.value = true;

@@ -4,6 +4,7 @@ import CreditCard from "../common/CreditCard.tsx";
 import type { Card, User } from "$store/sections/Account/MyAccount.tsx";
 import AddNewCard from "../common/AddNewCard.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
+import { showToast } from "$store/components/myAccountTabs/utils/toast.ts";
 
 export interface Props extends Partial<User> {}
 
@@ -31,12 +32,16 @@ function MyCardsTab({ savedCards }: Props) {
     const { number, holder, month, year, cvv } = card ?? {};
 
     if (
-      !number.length ||
-      !holder.length ||
-      !month.length ||
-      !year.length ||
-      !cvv.length
+      !number?.length ||
+      !holder?.length ||
+      !month?.length ||
+      !year?.length ||
+      !cvv?.length
     ) {
+      showToast({
+        message: "Dados inválidos!",
+        variant: "error",
+      });
       return;
     }
 
@@ -53,6 +58,11 @@ function MyCardsTab({ savedCards }: Props) {
     } finally {
       isLoading.value = false;
     }
+
+    showToast({
+      message: "Dados salvos com sucesso!",
+      variant: "success",
+    });
 
     closeEditor();
   };

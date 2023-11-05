@@ -3,6 +3,14 @@ interface ToastProps {
   message: string;
 }
 
+const addElementVariant = (element: HTMLElement | Element, variant: string) => {
+  element.classList.remove("success");
+  element.classList.remove("error");
+  element.classList.remove("warning");
+
+  element.classList.add(variant);
+};
+
 const fadeOut = async (toast: HTMLElement) => {
   toast.classList.add("fade-out");
   await new Promise((resolve) => setTimeout(resolve, 300));
@@ -25,8 +33,8 @@ export const showToast = ({
 
   if (!toast || !toastCloseButton) return;
 
-  toast.classList.add(variant);
-  toastCloseButton.classList.add(variant);
+  addElementVariant(toast, variant);
+  addElementVariant(toastCloseButton, variant);
 
   const toastMessage = toast.querySelector(".toast-message");
 
