@@ -7,6 +7,7 @@ import {
 import FormActions from "$store/components/myAccountTabs/common/FormActions.tsx";
 import { saveData } from "$store/components/myAccountTabs/utils/saveData.ts";
 import { maskCpf, maskInputDate, maskPhone } from "../utils/masks/common.ts";
+import Newsletter from "../common/Newsletter.tsx";
 
 export interface Props extends Partial<User> {}
 
@@ -157,6 +158,9 @@ function MyAccountTab({
             Editar
           </button>
         )}
+      </div>
+      <div>
+         <Newsletter email={formData.value.email} />
       </div>
     </>
   );
