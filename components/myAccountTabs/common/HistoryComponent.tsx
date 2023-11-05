@@ -13,7 +13,9 @@ const OrderDetails = ({ history }: { history: OrderDetailsProps }) => {
         return (
           <div key={index} className="flex items-center mt-2">
             <StatusBadge status={item.status} />
-            <span className="ml-2 text-sm">{translateStatus(item.status)}</span>
+            <span className="ml-2 text-base">
+              {translateStatus(item.status)}
+            </span>
             {!isLast && (
               <div className="flex-1 hidden lg:block h-0.5 bg-slate-200 ml-2 w-4" />
             )}
